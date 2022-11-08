@@ -1,0 +1,12 @@
+.element__like {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    opacity: 0.5;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    background: url(../../../images/like.svg) center center / 100% no-repeat;
+    transition: all 0.3s ease 0s;
+}

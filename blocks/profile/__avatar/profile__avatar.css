@@ -1,0 +1,10 @@
+ .profile__avatar {
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    background-image: url(../../../images/Jak.jpg);
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+
+ }
