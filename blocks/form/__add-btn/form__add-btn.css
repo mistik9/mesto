@@ -1,0 +1,10 @@
+.form__add-btn {
+    box-sizing: border-box;
+    width: 150px;
+    height: 50px;
+    border: 2px solid #FFFFFF;
+    border-radius: 2px;
+    background-color: black;
+    background-image: url(../../../images/add.svg);
+    background-size: cover;
+}

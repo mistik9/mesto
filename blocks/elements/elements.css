@@ -6,5 +6,7 @@
   row-gap: 20px;
   column-gap: 17px;
   box-sizing: border-box;
-  max-width: 100%;
+  max-width: 880px;
+  margin: 0;
+  padding: 0;
 }

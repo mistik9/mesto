@@ -1,6 +1,5 @@
-.element__like {
-    cursor: pointer;
-    height: 15px;
+.element__bottom-like {
+      height: 15px;
     width: 15px;
     opacity: 0.5;
     border-width: initial;
@@ -9,4 +8,5 @@
     border-image: initial;
     background: url(../../../images/like.svg) center center / 100% no-repeat;
     transition: all 0.3s ease 0s;
+    align-self: flex-end;
 }
