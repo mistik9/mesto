@@ -1,9 +1,0 @@
-.form__submit-btn {
-  width: 27px;
-  height: 27px;
-  cursor: pointer;
-  border: 1px solid #ffffff;
-  box-sizing: border-box;
-  background: #000000 url(../../../images/editprofile.svg) no-repeat center /
-    cover;
-}
