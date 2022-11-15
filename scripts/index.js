@@ -24,11 +24,11 @@ const closePopup = function () {
 };
 popupCloseButtonElement.addEventListener("click", closePopup);
 
-//сердечно
-const likeElement = function (e) {
-    e.target.classList.toggle('element__bottom-like_active');
-}
-likeButtonElemnt.forEach((item)=>item.addEventListener('click',likeElement));
+// //сердечно
+// const likeElement = function (e) {
+//     e.target.classList.toggle('element__bottom-like_active');
+// }
+// likeButtonElemnt.forEach((item)=>item.addEventListener('click',likeElement));
 
 
 // Обработчик «отправки» формы, хотя пока
@@ -46,7 +46,7 @@ function formSubmitHandler (evt) {
     let profileJob = document.querySelector(".profile-info-job");
     // Вставьте новые значения с помощью textContent
     profileJob.textContent  = job;
-    profileName.innerHTML = `<h1 class="profile-info-name">${name} <button class="profile__edit-button"></button></h1>`;
+    profileName.innerHTML = name;
     popupElement.classList.remove("popup_is-opened");
 }
 

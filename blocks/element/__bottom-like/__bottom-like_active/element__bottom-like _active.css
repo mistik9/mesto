@@ -1,4 +1,4 @@
 .element__bottom-like_active {
-  opacity: 1;
-  background: url(../../../../images/likeblack.svg) center no-repeat;
+  background: url(../../../../images/likeblack.svg) center center / 100%
+    no-repeat;
 }
