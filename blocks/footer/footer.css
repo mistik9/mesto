@@ -1,5 +1,11 @@
 .footer {
-    margin-top: 67px;
-    font-family: 'Inter', 'Arial', 'sans-serif';
-    
+  padding: 67px 0 0 0;
+  font-family: "Inter", "Arial", "sans-serif";
+  max-width: 880px;
+  margin: 0;
+}
+
+@media screen and (max-width: 568px) {
+  .footer {
+  }
 }

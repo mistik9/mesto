@@ -1,10 +1,21 @@
 .form__add-btn {
-    box-sizing: border-box;
-    width: 150px;
-    height: 50px;
-    border: 2px solid #FFFFFF;
-    border-radius: 2px;
-    background-color: black;
-    background-image: url(../../../images/add.svg);
-    background-size: cover;
+  box-sizing: border-box;
+  min-width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  background-color: black;
+  background-size: contain;
+  margin: 25px 0 25px 0;
+  cursor: pointer;
+}
+
+.form__add-btn:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 665px) {
+  .form__add-btn {
+    width: 100%;
+  }
 }

@@ -13,26 +13,30 @@
   <header class="header">
     <img src="./images/logo.svg" alt="лого">
   </header>
-  <main>
+  <main class="content">
     <div class="profile">
       <div class="profile__avatar"></div>
       <div class="profile-info">
-        <H1 class="name">Жак-Ив Кусто <button class="form__submit-btn form__submit-btn_action_edit"></button></H1>
-        <p class="description">Исследователь океана</p>
+        <h1 class="profile-info-name">Жак-Ив Кусто </h1>
+        <button class="profile__edit-button"></button>
+        <p class="profile-info-job">Исследователь океана</p>
       </div>
       <div class="popup">
         <div class="popup__container">
-          <h3>Редактировать профиль</h3>
-          <div class="input">
-            <input type="text" placeholder="Имя" class="input__text input__text_type_name">
-            <input type="text" placeholder="описание" class="input__text input__text_type_description">
-            <button class="form__submit-btn form__submit-btn_action_save">
+          <button class="popup__close"></button>
+          <form class="popup__content">
+            <h3 class="popup__title">Редактировать профиль</h3>
+            <div class="input">
+              <input type="text" placeholder="Имя" class="input__text input__text_type_name">
+              <input type="text" placeholder="Работа" class="input__text input__text_type_job">
+            </div>
+            <button class="popup__save" input type="submit">
               Сохранить
             </button>
-          </div>
+          </form>
         </div>
       </div>
-      <button class="form__add-btn"></button>
+      <button class="form__add-btn"><img src="./images/add.svg"></button>
     </div>
     <ul class="elements">
       <li class="element"><img class="element__image" src="./images/karachaevsk.jpg" alt="карачаевск">
@@ -75,7 +79,7 @@
   <footer class="footer">
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
-  <script src="script.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

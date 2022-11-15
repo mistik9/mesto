@@ -1,3 +1,9 @@
 .profile-info {
-    align-self:start ;
+  margin: 22px 0 25px 0;
+  display: grid;
+  grid-template-columns: max-content min-content;
+  grid-template-rows: min-content min-content;
+  column-gap: 18px;
+  row-gap: 16px;
+  align-items: baseline;
 }

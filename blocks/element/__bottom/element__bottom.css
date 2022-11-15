@@ -1,9 +1,10 @@
 .element__bottom {
-    display: flex;
-    justify-content: space-between;
-    padding: 25px 15px 31px 21px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 15px 31px 21px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
