@@ -1,9 +1,10 @@
 .element__bottom-like {
-  min-height: 19px;
   min-width: 22px;
-   background: url(../../../images/like.svg) center center / 100% no-repeat;
-   cursor: pointer;
-   border: none;
+  height: 19px;
+  background: url(../../../images/like.svg) center center / 100% no-repeat;
+  cursor: pointer;
+  border: none;
+  padding: 0;
 }
 
 .element__bottom-like:hover {

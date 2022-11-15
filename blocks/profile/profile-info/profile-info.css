@@ -4,6 +4,15 @@
   grid-template-columns: max-content min-content;
   grid-template-rows: min-content min-content;
   column-gap: 18px;
-  row-gap: 16px;
-  align-items: baseline;
+  row-gap: 10px;
+  align-items: center;
+}
+
+@media screen and (max-width: 665px) {
+  .profile-info {
+    margin: 22px 0 0 0;
+    column-gap: 10px;
+    row-gap: 8px;
+    grid-template-columns: 18px max-content min-content;
+  }
 }
