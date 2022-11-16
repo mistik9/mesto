@@ -12,8 +12,4 @@
   padding: 0;
 }
 
-@media screen and (max-width: 736px) {
-  .elements {
-    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
-  }
-}
+

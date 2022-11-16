@@ -2,25 +2,25 @@ const popupElement = document.querySelector(".popup"); // попап форма
 const popupOpenButtonElement = document.querySelector(".profile__edit-button"); // кнопка открыть попап
 const popupCloseButtonElement = popupElement.querySelector(".popup__close"); // кнопка закрыть попап
 const popupSaveButton = popupElement.querySelector(".popup__save"); // кнопка сохранить в попапе, вызывает событие submit
-let profileName = document.querySelector(".profile-info-name"); // имя профиля со страницы
-let profileJob = document.querySelector(".profile-info-job"); // работы профиля со страницы
+let profileName = document.querySelector(".profile__info-name"); // имя профиля со страницы
+let profileJob = document.querySelector(".profile__info-job"); // работы профиля со страницы
 let formElement = document.querySelector(".popup__content"); // форма попап, на которой вызывается событие submit
-let jobInput = document.querySelector(".input__text_type_job"); // поле ввода работы в форме
-let nameInput = document.querySelector(".input__text_type_name"); // поле ввода имени в форме
+let jobInput = document.querySelector(".form__input_text_type_job"); // поле ввода работы в форме
+let nameInput = document.querySelector(".form__input_text_type_name"); // поле ввода имени в форме
 const likeButtonElemnt = document.querySelectorAll(".element__bottom-like");
 
 
 // функция открытия попап
 const togglePopupVisibility = function (event) {
-    jobInput.placeholder = profileJob.textContent;
-    nameInput.placeholder = profileName.textContent;
-  popupElement.classList.toggle("popup_is-opened");
+    jobInput.value = profileJob.textContent;
+    nameInput.value = profileName.textContent;
+  popupElement.classList.toggle("popup_opened");
  };
 popupOpenButtonElement.addEventListener("click", togglePopupVisibility);
 
 // функция закрытия попапа
 const closePopup = function () {
-    popupElement.classList.remove("popup_is-opened");
+    popupElement.classList.remove("popup_opened");
 };
 popupCloseButtonElement.addEventListener("click", closePopup);
 
