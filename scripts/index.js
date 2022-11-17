@@ -2,8 +2,8 @@ const popupElement = document.querySelector(".popup"); // попап форма
 const popupOpenButtonElement = document.querySelector(".profile__edit-button"); // кнопка открыть попап
 const popupCloseButtonElement = popupElement.querySelector(".popup__close"); // кнопка закрыть попап
 const popupSaveButton = popupElement.querySelector(".popup__save"); // кнопка сохранить в попапе, вызывает событие submit
-let profileName = document.querySelector(".profile__info-name"); // имя профиля со страницы
-let profileJob = document.querySelector(".profile__info-job"); // работы профиля со страницы
+let profileName = document.querySelector(".profile__info_name"); // имя профиля со страницы
+let profileJob = document.querySelector(".profile__info_job"); // работы профиля со страницы
 let formElement = document.querySelector(".popup__content"); // форма попап, на которой вызывается событие submit
 let jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
 let nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
@@ -42,8 +42,8 @@ function formSubmitHandler (evt) {
     let job = jobInput.value;
     let name = nameInput.value;
     // Выберите элементы, куда должны быть вставлены значения полей
-    let profileName = document.querySelector(".profile__info-name");
-    let profileJob = document.querySelector(".profile__info-job");
+    let profileName = document.querySelector(".profile__info_name");
+    let profileJob = document.querySelector(".profile__info_job");
     // Вставьте новые значения с помощью textContent
     profileJob.textContent  = job;
     profileName.innerHTML = name;
