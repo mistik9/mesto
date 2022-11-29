@@ -1,7 +1,10 @@
 .element {
-  background-color: rgb(197, 53, 53);
+  background-color: white;
   border-radius: 10px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   color: black;
+  position: relative;
+
   
 }
