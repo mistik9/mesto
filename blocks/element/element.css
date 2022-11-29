@@ -1,6 +1,7 @@
 .element {
-  background-color: white;
+  background-color: rgb(197, 53, 53);
   border-radius: 10px;
   display: grid;
   color: black;
+  
 }

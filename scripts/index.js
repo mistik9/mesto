@@ -1,60 +1,124 @@
-const popupElement = document.querySelector(".popup"); // попап форма
-const popupOpenButtonElement = document.querySelector(".profile__edit-button"); // кнопка открыть попап
-const popupCloseButtonElement = popupElement.querySelector(".popup__close"); // кнопка закрыть попап
-const popupSaveButton = popupElement.querySelector(".popup__save"); // кнопка сохранить в попапе, вызывает событие submit
+/*
+Генерация карточек
+*/
+const elementTemplate = document.querySelector("#element-template").content; //шаблон картинок карточек
+const listElement = document.querySelector(".elements__container"); // все карточки с картинками
+const initialCards = [
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  },
+];
+
+// удаление карточки
+const handleDeleteItem = (e) => {
+  e.target.closest(".element").remove();
+};
+// генерация карточек
+const generateItem = (item) => {
+  const elementItem = elementTemplate.cloneNode(true);
+  elementItem.querySelector(".element__image").src = item.link;
+  elementItem.querySelector(".element__bottom-title").textContent = item.name;
+  elementItem.querySelector(".element__delete").addEventListener("click", handleDeleteItem);
+  return elementItem;
+}
+initialCards.forEach((item) => listElement.append(generateItem(item)));
+
+/*
+Попап профиль
+*/
+const popupOpen = document.querySelector(".profile__edit-button"); // кнопка открыть попап слева
+const profileForm = document.querySelector("#popup_profile"); // попап форма профиля
 let profileName = document.querySelector(".profile__info-name"); // имя профиля со страницы
 let profileJob = document.querySelector(".profile__info-job"); // работы профиля со страницы
-let formElement = document.querySelector(".popup__content"); // форма попап, на которой вызывается событие submit
-let jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
 let nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
-const likeButtonElemnt = document.querySelectorAll(".element__bottom-like");
+let jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
+let profileElement = profileForm.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
 
-
-// функция открытия попап
-const togglePopupVisibility = function (event) {
-    jobInput.value = profileJob.textContent;
-    nameInput.value = profileName.textContent;
-  popupElement.classList.toggle("popup_opened");
- };
-popupOpenButtonElement.addEventListener("click", togglePopupVisibility);
-
-// функция закрытия попапа
-const closePopup = function () {
-    popupElement.classList.remove("popup_opened");
+// открытие попапа редактировать профиль
+const openPopup = function (e) {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  profileForm.classList.toggle("popup_opened");
 };
-popupCloseButtonElement.addEventListener("click", closePopup);
+popupOpen.addEventListener("click", openPopup);
 
-// //сердечно
-// const likeElement = function (e) {
-//     e.target.classList.toggle('element__bottom-like_active');
-// }
-// likeButtonElemnt.forEach((item)=>item.addEventListener('click',likeElement));
+// закрытие попапа
+const closePopup = function (e) {
+  profileForm.classList.remove("popup_opened");
+};
+profileForm.querySelector(".popup__close").addEventListener("click", closePopup);
 
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-
-    // Получите значение полей jobInput и nameInput из свойства value
-    let job = jobInput.value;
-    let name = nameInput.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    let profileName = document.querySelector(".profile__info-name");
-    let profileJob = document.querySelector(".profile__info-job");
-    // Вставьте новые значения с помощью textContent
-    profileJob.textContent  = job;
-    profileName.innerHTML = name;
-    popupElement.classList.remove("popup_opened");
+// отправка формы
+function profileChange(e) {
+  e.preventDefault();
+  profileName.innerHTML = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopup();
 }
+profileElement.addEventListener("submit", profileChange);
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
+/*
+Попап добавить картинку
+*/
+const popupAdd = document.querySelector(".profile__add-button"); // кнопка открыть попап справа
+const addForm = document.querySelector("#popup_add"); // попап форма добавления картинки
+let placeInput = document.querySelector(".popup__input_type_place"); // поле ввода места
+let urlInput = document.querySelector(".popup__input_type_url"); // поле ввода ссылки
+let addElement = addForm.querySelector(".popup__content") // форма попап добавление карточки на которой вызывается событие submit 
 
+// открытие попапа добавление карточки
+const openPopupAdd = function (e) {
+  placeInput.value = placeInput.placeholder;
+  addForm.classList.toggle("popup_opened");
+};
+popupAdd.addEventListener("click", openPopupAdd);
 
+// закрытие попапа
+const closePopupAdd = function (e) {
+  addForm.classList.remove("popup_opened");
+};
+addForm.querySelector(".popup__close").addEventListener("click", closePopupAdd);
 
+// добавление карточки
+function itemAdd (e) {
+  e.preventDefault();
+  closePopupAdd();
+  let card = {
+    name: placeInput.value,
+    link: urlInput.value,
+  }
+  listElement.append(generateItem(card));
+}
+addElement.addEventListener("submit", itemAdd);
 
+/*
+Сердечно
+*/
+const likeButtonElemnt = document.querySelectorAll(".element__bottom-like"); // массив всех сердечек
 
+// поставить сердечко
+const likeElement = function (e) {
+  e.target.classList.toggle("element__bottom-like_active");
+};
+likeButtonElemnt.forEach((item) => item.addEventListener("click", likeElement));
