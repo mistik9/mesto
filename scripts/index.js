@@ -38,6 +38,7 @@ const handleDeleteItem = (e) => {
 const generateItem = (item) => {
   const elementItem = elementTemplate.cloneNode(true);
   elementItem.querySelector(".element__image").src = item.link;
+  elementItem.querySelector(".element__image").alt = item.name
   elementItem.querySelector(".element__bottom-title").textContent = item.name;
   elementItem.querySelector(".element__delete").addEventListener("click", handleDeleteItem);
   return elementItem;
@@ -122,3 +123,22 @@ const likeElement = function (e) {
   e.target.classList.toggle("element__bottom-like_active");
 };
 likeButtonElemnt.forEach((item) => item.addEventListener("click", likeElement));
+
+
+//Открытие попапа с картинкой
+const popupImage = document.querySelector("#popup_image");
+const everyCard = listElement.querySelectorAll(".element__image");
+let itemImage = document.querySelector(".popup__image"); // поле ввода места
+let itemDisc = document.querySelector(".popup__discription"); // поле ввода ссылки
+
+
+const openPopupImage = (item) => {
+  popupImage.classList.toggle("popup_opened");
+  everyCard.src = item.link;
+  everyCard.alt = item.name;
+  return item;
+
+};
+
+everyCard.forEach((item) => item.addEventListener("click", openPopupImage));
+
