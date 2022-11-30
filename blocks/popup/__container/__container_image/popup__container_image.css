@@ -1,6 +1,6 @@
 .popup__container_image {
-    max-width: 816px;
-    min-height: 562px;
+    max-width: 75vw;
+    max-height: 75vh;
     padding: 0;
 }
 

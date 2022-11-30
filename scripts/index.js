@@ -38,7 +38,8 @@ const handleDeleteItem = (e) => {
 const generateItem = (item) => {
   const elementItem = elementTemplate.cloneNode(true);
   elementItem.querySelector(".element__image").src = item.link;
-  elementItem.querySelector(".element__image").alt = item.name
+  elementItem.querySelector(".element__image").alt = item.name;
+  elementItem.querySelector(".element__image").addEventListener("click", openPopupImage);
   elementItem.querySelector(".element__bottom-title").textContent = item.name;
   elementItem.querySelector(".element__delete").addEventListener("click", handleDeleteItem);
   return elementItem;
@@ -128,17 +129,16 @@ likeButtonElemnt.forEach((item) => item.addEventListener("click", likeElement));
 //Открытие попапа с картинкой
 const popupImage = document.querySelector("#popup_image");
 const everyCard = listElement.querySelectorAll(".element__image");
-let itemImage = document.querySelector(".popup__image"); // поле ввода места
-let itemDisc = document.querySelector(".popup__discription"); // поле ввода ссылки
+let itemImage = document.querySelector(".popup__image"); 
+let itemDisc = document.querySelector(".popup__discription"); 
 
-
-const openPopupImage = (item) => {
+function openPopupImage (e) {
+  itemImage.src = e.target.src;
+  itemDisc.innerHTML = e.target.alt;
   popupImage.classList.toggle("popup_opened");
-  everyCard.src = item.link;
-  everyCard.alt = item.name;
-  return item;
-
 };
 
-everyCard.forEach((item) => item.addEventListener("click", openPopupImage));
-
+const closePopupImg = function (e) {
+  popupImage.classList.remove("popup_opened");
+};
+popupImage.querySelector(".popup__close").addEventListener("click", closePopupImg);
