@@ -53,12 +53,12 @@ const popupOpen = document.querySelector(".profile__edit-button"); // кнопк
 const profileForm = document.querySelector("#popup_profile"); // попап форма профиля
 let profileName = document.querySelector(".profile__info-name"); // имя профиля со страницы
 let profileJob = document.querySelector(".profile__info-job"); // работы профиля со страницы
-let nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
-let jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
-let profileElement = profileForm.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
+const nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
+const jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
+const profileElement = profileForm.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
 
 // открытие попапа редактировать профиль
-const openPopup = function (e) {
+function openPopup(e) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   profileForm.classList.toggle("popup_opened");
@@ -66,7 +66,7 @@ const openPopup = function (e) {
 popupOpen.addEventListener("click", openPopup);
 
 // закрытие попапа
-const closePopup = function (e) {
+function closePopup(e) {
   profileForm.classList.remove("popup_opened");
 };
 profileForm.querySelector(".popup__close").addEventListener("click", closePopup);
@@ -87,23 +87,23 @@ const popupAdd = document.querySelector(".profile__add-button"); // кнопка
 const addForm = document.querySelector("#popup_add"); // попап форма добавления картинки
 let placeInput = document.querySelector(".popup__input_type_place"); // поле ввода места
 let urlInput = document.querySelector(".popup__input_type_url"); // поле ввода ссылки
-let addElement = addForm.querySelector(".popup__content") // форма попап добавление карточки на которой вызывается событие submit 
+const addElement = addForm.querySelector(".popup__content") // форма попап добавление карточки на которой вызывается событие submit 
 
 // открытие попапа добавление карточки
-const openPopupAdd = function (e) {
+function openPopupAdd(e) {
   placeInput.value = placeInput.placeholder;
   addForm.classList.toggle("popup_opened");
 };
 popupAdd.addEventListener("click", openPopupAdd);
 
 // закрытие попапа
-const closePopupAdd = function (e) {
+function closePopupAdd(e) {
   addForm.classList.remove("popup_opened");
 };
 addForm.querySelector(".popup__close").addEventListener("click", closePopupAdd);
 
 // добавление карточки
-function itemAdd (e) {
+function itemAdd(e) {
   e.preventDefault();
   closePopupAdd();
   let card = {
@@ -120,7 +120,7 @@ addElement.addEventListener("submit", itemAdd);
 const likeButtonElemnt = document.querySelectorAll(".element__bottom-like"); // массив всех сердечек
 
 // поставить сердечко
-const likeElement = function (e) {
+function likeElement(e) {
   e.target.classList.toggle("element__bottom-like_active");
 };
 likeButtonElemnt.forEach((item) => item.addEventListener("click", likeElement));
@@ -129,16 +129,16 @@ likeButtonElemnt.forEach((item) => item.addEventListener("click", likeElement));
 //Открытие попапа с картинкой
 const popupImage = document.querySelector("#popup_image");
 const everyCard = listElement.querySelectorAll(".element__image");
-let itemImage = document.querySelector(".popup__image"); 
-let itemDisc = document.querySelector(".popup__discription"); 
+let itemImage = document.querySelector(".popup__image");
+let itemDisc = document.querySelector(".popup__discription");
 
-function openPopupImage (e) {
+function openPopupImage(e) {
   itemImage.src = e.target.src;
   itemDisc.innerHTML = e.target.alt;
   popupImage.classList.toggle("popup_opened");
 };
 
-const closePopupImg = function (e) {
+function closePopupImg(e) {
   popupImage.classList.remove("popup_opened");
 };
 popupImage.querySelector(".popup__close").addEventListener("click", closePopupImg);
