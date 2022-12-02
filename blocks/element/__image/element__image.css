@@ -8,9 +8,14 @@
   height: 282px;
 }
 
+.element__image:hover {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 736px) {
-  .popup__image {
+  .element__image {
     max-width: 240px;
     min-height: 299px;
   }
 }
+
