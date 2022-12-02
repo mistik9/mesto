@@ -4,7 +4,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s linear;
@@ -12,4 +12,8 @@
   align-items: center;
   font-family: "Inter", "Arial", "sans-serif";
   z-index: 2;
+}
+
+.popup:nth-of-type(3){
+  background-color: rgba(0, 0, 0, 0.9);
 }

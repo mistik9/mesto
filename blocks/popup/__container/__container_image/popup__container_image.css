@@ -1,14 +1,11 @@
 .popup__container_image {
-    max-width: 75vw;
-    max-height: 75vh;
-    padding: 0;
-    background-color: black;
+  padding: 0;
+  background-color: black;
+  
 }
 
 @media screen and (max-width: 736px) {
-    .popup__container_image {
-      max-width: 240px;
-     
-      
-    }
+  .popup__container_image {
+    max-width: 240px;
   }
+}
