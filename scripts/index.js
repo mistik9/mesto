@@ -90,9 +90,9 @@ const formAddCard = popupAdd.querySelector(".popup__content") // форма по
 // попап добавление карточки
 function callPopupAdd() {
   openPopup(popupAdd);
-  popupAdd.querySelector(".popup__close").addEventListener("click", () => closePopup(popupAdd));
-};
+  };
 openPopupAddButton.addEventListener("click", callPopupAdd);
+popupAdd.querySelector(".popup__close").addEventListener("click", () => closePopup(popupAdd));
 
 // добавление карточки
 function addNewItem(e) {
@@ -120,13 +120,13 @@ const popupImage = document.querySelector("#popup_image");
 const itemImage = document.querySelector(".popup__image");
 const itemDisc = document.querySelector(".popup__discription");
 
+popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
+
 function callPopupImage(e) {
   itemImage.src = e.target.src;
   itemImage.alt = e.target.alt
   itemDisc.textContent = e.target.alt;
   openPopup(popupImage);
-  popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
-
 };
 
 //функция закрытия попапа
