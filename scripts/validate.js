@@ -28,6 +28,7 @@ const toggleButton = (inputs, button, config) => {
     //кнопка неактивна
     button.classList.add(config.inactiveButtonClass);
     button.disabled = "disabled";
+    
   }
 };
 
