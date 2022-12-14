@@ -46,9 +46,9 @@ const generateItem = (item) => {
   elementItem
     .querySelector(".element__delete")
     .addEventListener("click", handleDeleteItem);
-  document
-    .querySelectorAll(".element__bottom-like")
-    .forEach((item) => item.addEventListener("click", likeElement));
+  elementItem
+    .querySelector(".element__bottom-like")
+    .addEventListener("click", likeElement);
   return elementItem;
 };
 initialCards.forEach((item) => listElement.append(generateItem(item)));
@@ -56,7 +56,7 @@ initialCards.forEach((item) => listElement.append(generateItem(item)));
 /*
 Попап профиль
 */
-const openPopupEditButton = document.querySelector(".profile__edit-button"); // кнопка открыть попап слева
+const popupEditButton = document.querySelector(".profile__edit-button"); // кнопка открыть попап слева
 const popupProfile = document.querySelector("#popup_profile"); // попап профиля
 const profileName = document.querySelector(".profile__info-name"); // имя профиля со страницы
 const profileJob = document.querySelector(".profile__info-job"); // работа профиля со страницы
@@ -69,16 +69,14 @@ function callPopupProfile(e) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  closePopup(popupProfile);
 }
-openPopupEditButton.addEventListener("click", callPopupProfile);
+popupEditButton.addEventListener("click", callPopupProfile);
 
 // отправка формы
 function changeProfile(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-
   closePopup(popupProfile);
 }
 formAddProfile.addEventListener("submit", changeProfile);
@@ -86,7 +84,7 @@ formAddProfile.addEventListener("submit", changeProfile);
 /*
 Попап добавить картинку
 */
-const openPopupAddButton = document.querySelector(".profile__add-button"); // кнопка открыть попап справа
+const PopupAddButton = document.querySelector(".profile__add-button"); // кнопка открыть попап справа
 const popupAdd = document.querySelector("#popup_add"); // попап форма добавления картинки
 const placeInput = document.querySelector(".popup__input_type_place"); // поле ввода места
 const urlInput = document.querySelector(".popup__input_type_url"); // поле ввода ссылки
@@ -95,9 +93,8 @@ const formAddCard = popupAdd.querySelector(".popup__content"); // форма п�
 // попап добавление карточки
 function callPopupAdd() {
   openPopup(popupAdd);
-  closePopup(popupAdd);
 }
-openPopupAddButton.addEventListener("click", callPopupAdd);
+PopupAddButton.addEventListener("click", callPopupAdd);
 
 // добавление карточки
 function addNewItem(e) {
@@ -110,7 +107,6 @@ function addNewItem(e) {
   placeInput.value = "";
   urlInput.value = "";
   listElement.prepend(generateItem(card));
-  console.log(placeInput.value);
 }
 formAddCard.addEventListener("submit", addNewItem);
 
@@ -132,43 +128,34 @@ function callPopupImage(e) {
   itemImage.alt = e.target.alt;
   itemDisc.textContent = e.target.alt;
   openPopup(popupImage);
-  closePopup(popupImage);
 }
 
 //функция закрытия попапа
 function closePopup(popup) {
-  const saveBtn = popup.querySelector(".popup__save");
-  const closeBtn = popup.querySelector(".popup__close");
- if (saveBtn){
-  saveBtn.addEventListener("click", function(evt){popup.classList.remove("popup_opened")});
- } 
- if(closeBtn) {
-  closeBtn.addEventListener("click",function(evt){popup.classList.remove("popup_opened")});
- }
- 
-  
-  popup.addEventListener("click", (evt) => handleOverlay(evt, popup));
-}
+  popup.classList.remove("popup_opened");
+  document.removeEventListener('keydown', closeByEsc);
+  };
+
 
 //функция открытия попапа
 function openPopup(popup) {
-  popup.classList.toggle("popup_opened");
-  document.addEventListener("keydown", function CallKeyDown (evt)  {
-    handleKeyDown(evt, popup);
-    document.removeEventListener('keydown', CallKeyDown);
-  });
-  
+  popup.classList.add("popup_opened");
+  document.addEventListener('keydown', closeByEsc);
+  popup.addEventListener("click", (evt) => handleOverlay(evt, popup));
+  popup.querySelector(".popup__close").addEventListener("click", () => closePopup(popup));
 }
 
 //закрытие попапа по клавише эск
 
-function handleKeyDown(evt, popup) {
-  if (evt.key === "Escape") popup.classList.remove("popup_opened");
-  
-}
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+} 
 //закрытие попапа на оверлей
 function handleOverlay(evt, popup) {
   if (!evt.target.closest(".popup__container")) {
-        popup.classList.remove("popup_opened");
+    closePopup(popup); 
   }
 }
