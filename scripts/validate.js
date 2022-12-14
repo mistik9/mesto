@@ -1,21 +1,32 @@
-const inputs = [...document.querySelectorAll(".popup__input")];
+const input = document.querySelector ('.popup__input')
+const error = document.querySelector(`#${input.id}-error`);
+
+
+const showError = (input, config) => {
+  error.textContent = input.validationMessage;
+  console.log(input.validationMessage)
+  error.classList.add(config.errorClass);
+  input.classList.add(config.inputErrorClass);
+};
+
+const hideError = (input, config) => {
+  error.textContent = "";
+  error.classList.remove(config.errorClass);
+  input.classList.remove(config.inputErrorClass);
+};
+
+
 
 //проверка на валидность формы
 const checkInputValidity = (input, config) => {
-  const error = document.querySelector(`#${input.id}-error`);
 
-  if (input.validity.valid) {
-    //поле валидно
-    error.textContent = "";
-    error.classList.remove(config.errorClass);
-    input.classList.remove(config.inputErrorClass);
+  if (!input.validity.valid) {
+    showError(input, config);
   } else {
-    //поле невалидно
-    error.textContent = input.validationMessage;
-    error.classList.add(config.errorClass);
-    input.classList.add(config.inputErrorClass);
+    hideError(input, config);
   }
 };
+
 //переключатель кнопки
 const toggleButton = (inputs, button, config) => {
   const isFormValid = inputs.every((input) => input.validity.valid);
@@ -28,6 +39,7 @@ const toggleButton = (inputs, button, config) => {
     //кнопка неактивна
     button.classList.add(config.inactiveButtonClass);
     button.disabled = "disabled";
+    
   }
 };
 
@@ -37,9 +49,6 @@ const enableValidation = (config) => {
     const inputs = [...form.querySelectorAll(config.inputSelector)];
     const button = form.querySelector(config.submitButtonSelector);
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
 
     inputs.forEach((input) => {
       input.addEventListener("input", () => {
