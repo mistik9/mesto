@@ -71,6 +71,8 @@ function callPopupProfile(e) {
   openPopup(popupProfile);
 }
 popupEditButton.addEventListener("click", callPopupProfile);
+popupProfile.addEventListener("click",(evt) => handleOverlay(evt, popupProfile));
+popupProfile.querySelector(".popup__close").addEventListener("click", () => closePopup(popupProfile));
 
 // отправка формы
 function changeProfile(e) {
@@ -108,6 +110,8 @@ function addNewItem(e) {
   listElement.prepend(generateItem(card));
 }
 formAddCard.addEventListener("submit", addNewItem);
+popupAdd.addEventListener("click",(evt) => handleOverlay(evt, popupAdd));
+popupAdd.querySelector(".popup__close").addEventListener("click", () => closePopup(popupAdd));
 
 /*
 Сердечно
@@ -122,7 +126,6 @@ const popupImage = document.querySelector("#popup_image");
 const itemImage = document.querySelector(".popup__image");
 const itemDisc = document.querySelector(".popup__discription");
 
-popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
 
 function callPopupImage(e) {
   itemImage.src = e.target.src;
@@ -130,6 +133,9 @@ function callPopupImage(e) {
   itemDisc.textContent = e.target.alt;
   openPopup(popupImage);
 }
+popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
+popupImage.addEventListener("click",(evt) => handleOverlay(evt, popupImage));
+popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
 
 //функция закрытия попапа
 function closePopup(popup) {
@@ -142,8 +148,8 @@ function closePopup(popup) {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
-  popup.addEventListener("click", (evt) => handleOverlay(evt, popup));
-  popup.querySelector(".popup__close").addEventListener("click", () => closePopup(popup));
+
+ 
 }
 
 //закрытие попапа по клавише эск
