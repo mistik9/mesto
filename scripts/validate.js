@@ -1,10 +1,10 @@
 const input = document.querySelector ('.popup__input')
-const error = document.querySelector(`#${input.id}-error`);
+
 
 
 const showError = (input, config) => {
+  const error = document.querySelector(`#${input.id}-error`);
   error.textContent = input.validationMessage;
-  console.log(input.validationMessage)
   error.classList.add(config.errorClass);
   input.classList.add(config.inputErrorClass);
 };
@@ -34,11 +34,11 @@ const toggleButton = (inputs, button, config) => {
   if (isFormValid) {
     //кнопка активна
     button.classList.remove(config.inactiveButtonClass);
-    button.disabled = "";
+    button.disabled = false;
   } else {
     //кнопка неактивна
     button.classList.add(config.inactiveButtonClass);
-    button.disabled = "disabled";
+    button.disabled = true;
     
   }
 };

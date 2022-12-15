@@ -5,8 +5,14 @@
   line-height: 15px;
   color: #ff0000;
   display: block;
-  padding-top: 5px;
   min-height: 25px;
-  
-  
+  margin-top: 5px;
+
+}
+
+@media screen and (max-width: 736px) {
+  .error {
+    max-height: 25px;
+    margin-top: 0;
+  }
 }
