@@ -84,7 +84,7 @@ formAddProfile.addEventListener("submit", changeProfile);
 /*
 Попап добавить картинку
 */
-const PopupAddButton = document.querySelector(".profile__add-button"); // кнопка открыть попап справа
+const popupAddButton = document.querySelector(".profile__add-button"); // кнопка открыть попап справа
 const popupAdd = document.querySelector("#popup_add"); // попап форма добавления картинки
 const placeInput = document.querySelector(".popup__input_type_place"); // поле ввода места
 const urlInput = document.querySelector(".popup__input_type_url"); // поле ввода ссылки
@@ -94,7 +94,7 @@ const formAddCard = popupAdd.querySelector(".popup__content"); // форма п�
 function callPopupAdd() {
   openPopup(popupAdd);
 }
-PopupAddButton.addEventListener("click", callPopupAdd);
+popupAddButton.addEventListener("click", callPopupAdd);
 
 // добавление карточки
 function addNewItem(e) {
@@ -141,7 +141,7 @@ function closePopup(popup) {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener('keydown', closeByEsc);
-  popup.addEventListener("click", (evt) => handleOverlay(evt, popup));
+
   popup.querySelector(".popup__close").addEventListener("click", () => closePopup(popup));
 }
 
@@ -158,4 +158,5 @@ function handleOverlay(evt, popup) {
   if (!evt.target.closest(".popup__container")) {
     closePopup(popup); 
   }
+    popup.addEventListener("click", (evt) => handleOverlay(evt, popup));
 }
