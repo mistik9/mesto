@@ -165,5 +165,5 @@ function handleOverlay(evt, popup) {
   if (!evt.target.closest(".popup__container")) {
     closePopup(popup); 
   }
-    popup.addEventListener("click", (evt) => handleOverlay(evt, popup));
+  
 }

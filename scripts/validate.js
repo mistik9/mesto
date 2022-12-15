@@ -10,6 +10,7 @@ const showError = (input, config) => {
 };
 
 const hideError = (input, config) => {
+  const error = document.querySelector(`#${input.id}-error`);
   error.textContent = "";
   error.classList.remove(config.errorClass);
   input.classList.remove(config.inputErrorClass);
