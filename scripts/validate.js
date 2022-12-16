@@ -1,7 +1,3 @@
-const input = document.querySelector ('.popup__input')
-
-
-
 const showError = (input, config) => {
   const error = document.querySelector(`#${input.id}-error`);
   error.textContent = input.validationMessage;
@@ -40,7 +36,7 @@ const toggleButton = (inputs, button, config) => {
     //кнопка неактивна
     button.classList.add(config.inactiveButtonClass);
     button.disabled = true;
-    
+
   }
 };
 

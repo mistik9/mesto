@@ -72,7 +72,6 @@ function callPopupProfile(e) {
 }
 popupEditButton.addEventListener("click", callPopupProfile);
 popupProfile.addEventListener("click",(evt) => handleOverlay(evt, popupProfile));
-popupProfile.querySelector(".popup__close").addEventListener("click", () => closePopup(popupProfile));
 
 // отправка формы
 function changeProfile(e) {
@@ -111,7 +110,6 @@ function addNewItem(e) {
 }
 formAddCard.addEventListener("submit", addNewItem);
 popupAdd.addEventListener("click",(evt) => handleOverlay(evt, popupAdd));
-popupAdd.querySelector(".popup__close").addEventListener("click", () => closePopup(popupAdd));
 
 /*
 Сердечно
@@ -133,9 +131,7 @@ function callPopupImage(e) {
   itemDisc.textContent = e.target.alt;
   openPopup(popupImage);
 }
-popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
 popupImage.addEventListener("click",(evt) => handleOverlay(evt, popupImage));
-popupImage.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
 
 //функция закрытия попапа
 function closePopup(popup) {
@@ -160,10 +156,11 @@ function closeByEsc(evt) {
     closePopup(openedPopup);
   }
 } 
-//закрытие попапа на оверлей
-function handleOverlay(evt, popup) {
-  if (!evt.target.closest(".popup__container")) {
-    closePopup(popup); 
-  }
-  
-}
+//закрытие попапа на оверлей и кнопку закрыть
+document.querySelectorAll('.popup').forEach( popup => {
+  popup.addEventListener('mousedown', (evt) => { 
+    if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) { 
+      closePopup(popup); 
+    }; 
+  }); 
+}); 
