@@ -1,12 +1,12 @@
-const showError = (input, config) => {
-  const error = document.querySelector(`#${input.id}-error`);
+const showError = (form, input, config) => {
+  const error = form.querySelector(`#${input.id}-error`);
   error.textContent = input.validationMessage;
   error.classList.add(config.errorClass);
   input.classList.add(config.inputErrorClass);
 };
 
-const hideError = (input, config) => {
-  const error = document.querySelector(`#${input.id}-error`);
+const hideError = (form, input, config) => {
+  const error = form.querySelector(`#${input.id}-error`);
   error.textContent = "";
   error.classList.remove(config.errorClass);
   input.classList.remove(config.inputErrorClass);
@@ -15,12 +15,12 @@ const hideError = (input, config) => {
 
 
 //проверка на валидность формы
-const checkInputValidity = (input, config) => {
+const checkInputValidity = (form, input, config) => {
 
   if (!input.validity.valid) {
-    showError(input, config);
+    showError(form, input, config);
   } else {
-    hideError(input, config);
+    hideError(form, input, config);
   }
 };
 
@@ -49,7 +49,7 @@ const enableValidation = (config) => {
 
     inputs.forEach((input) => {
       input.addEventListener("input", () => {
-        checkInputValidity(input, config);
+        checkInputValidity(form, input, config);
         toggleButton(inputs, button, config);
       });
     });
