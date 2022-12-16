@@ -71,7 +71,7 @@ function callPopupProfile(e) {
   openPopup(popupProfile);
 }
 popupEditButton.addEventListener("click", callPopupProfile);
-popupProfile.addEventListener("click",(evt) => handleOverlay(evt, popupProfile));
+
 
 // отправка формы
 function changeProfile(e) {
@@ -109,7 +109,7 @@ function addNewItem(e) {
   listElement.prepend(generateItem(card));
 }
 formAddCard.addEventListener("submit", addNewItem);
-popupAdd.addEventListener("click",(evt) => handleOverlay(evt, popupAdd));
+
 
 /*
 Сердечно
@@ -131,7 +131,7 @@ function callPopupImage(e) {
   itemDisc.textContent = e.target.alt;
   openPopup(popupImage);
 }
-popupImage.addEventListener("click",(evt) => handleOverlay(evt, popupImage));
+
 
 //функция закрытия попапа
 function closePopup(popup) {
