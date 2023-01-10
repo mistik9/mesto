@@ -1,3 +1,6 @@
+import { Card } from "./card.js";
+import { FormValidator } from "./FormValidator.js";
+
 const initialCards = [
   {
     name: "Архыз",
@@ -25,37 +28,37 @@ const initialCards = [
   },
 ];
 
-/*
-Генерация карточек
-*/
-const elementTemplate = document.querySelector("#element-template").content; //шаблон картинок карточек
-const listElement = document.querySelector(".elements__container"); // все карточки с картинками
-
-// удаление карточки
-const handleDeleteItem = (e) => {
-  e.target.closest(".element").remove();
+//функция закрытия попапа
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEsc);
 };
-// генерация карточек
-const generateItem = (item) => {
-  const elementItem = elementTemplate.cloneNode(true);
-  const elementImage = elementItem.querySelector(".element__image");
-  elementImage.src = item.link;
-  elementImage.alt = item.name;
-  elementImage.addEventListener("click", callPopupImage);
-  elementItem.querySelector(".element__bottom-title").textContent = item.name;
-  elementItem
-    .querySelector(".element__delete")
-    .addEventListener("click", handleDeleteItem);
-  elementItem
-    .querySelector(".element__bottom-like")
-    .addEventListener("click", likeElement);
-  return elementItem;
-};
-initialCards.forEach((item) => listElement.append(generateItem(item)));
 
-/*
-Попап профиль
-*/
+
+//функция открытия попапа
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEsc);
+}
+
+//закрытие попапа по клавише эск
+function closeByEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+//закрытие попапа на оверлей и кнопку закрыть
+document.querySelectorAll(".popup").forEach(popup => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
+      closePopup(popup);
+    };
+  });
+});
+
+//Попап профиль
 const popupEditButton = document.querySelector(".profile__edit-button"); // кнопка открыть попап слева
 const popupProfile = document.querySelector("#popup_profile"); // попап профиля
 const profileName = document.querySelector(".profile__info-name"); // имя профиля со страницы
@@ -69,9 +72,8 @@ function callPopupProfile(e) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-}
+ }
 popupEditButton.addEventListener("click", callPopupProfile);
-
 
 // отправка формы
 function changeProfile(e) {
@@ -82,85 +84,51 @@ function changeProfile(e) {
 }
 formAddProfile.addEventListener("submit", changeProfile);
 
-/*
-Попап добавить картинку
-*/
-const popupAddButton = document.querySelector(".profile__add-button"); // кнопка открыть попап справа
+
+//Попап добавить картинку
 const popupAdd = document.querySelector("#popup_add"); // попап форма добавления картинки
-const placeInput = document.querySelector(".popup__input_type_place"); // поле ввода места
-const urlInput = document.querySelector(".popup__input_type_url"); // поле ввода ссылки
 const formAddCard = popupAdd.querySelector(".popup__content"); // форма попап добавление карточки на которой вызывается событие submit
 
-// попап добавление карточки
+//загрузка имеющихся карточек
+initialCards.forEach((item) => {
+  const card = new Card(item, "#element-template");
+  const cardElement = card.generateItem();
+  document.querySelector(".elements__container").append(cardElement);
+})
+
+// функция добавление карточки
 function callPopupAdd() {
   openPopup(popupAdd);
 }
-popupAddButton.addEventListener("click", callPopupAdd);
+document.querySelector(".profile__add-button").addEventListener("click", callPopupAdd);
+
 
 // добавление карточки
 function addNewItem(e) {
   e.preventDefault();
-  const card = {
-    name: placeInput.value,
-    link: urlInput.value,
+  let item = {
+    name: document.querySelector(".popup__input_type_place").value,
+    link: document.querySelector(".popup__input_type_url").value,
   }
+  const card = new Card(item, "#element-template");
+  const cardElement = card.generateItem();
   closePopup(popupAdd);
   formAddCard.reset();
-  listElement.prepend(generateItem(card));
+  document.querySelector(".elements__container").prepend(cardElement);
 }
+
 formAddCard.addEventListener("submit", addNewItem);
 
+//валидация формы
 
-/*
-Сердечно
-*/
-// поставить сердечко
-function likeElement(e) {
-  e.target.classList.toggle("element__bottom-like_active");
+const start_config = {
+  formSelector: ".popup__content",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__save",
+  inactiveButtonClass: "popup__save_invalid",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "error",
 }
 
-//попап с картинкой
-const popupImage = document.querySelector("#popup_image");
-const itemImage = document.querySelector(".popup__image");
-const itemDisc = document.querySelector(".popup__discription");
-
-
-function callPopupImage(e) {
-  itemImage.src = e.target.src;
-  itemImage.alt = e.target.alt;
-  itemDisc.textContent = e.target.alt;
-  openPopup(popupImage);
-}
-
-
-//функция закрытия попапа
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener('keydown', closeByEsc);
-  };
-
-
-//функция открытия попапа
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener('keydown', closeByEsc);
-
- 
-}
-
-//закрытие попапа по клавише эск
-
-function closeByEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
-  }
-} 
-//закрытие попапа на оверлей и кнопку закрыть
-document.querySelectorAll('.popup').forEach( popup => {
-  popup.addEventListener('mousedown', (evt) => { 
-    if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close')) { 
-      closePopup(popup); 
-    }; 
-  }); 
-}); 
+const validator = new FormValidator(start_config);
+validator.enableValidation();
