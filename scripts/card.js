@@ -42,7 +42,7 @@ export class Card {
 
     _handleSubmit(e) {
         e.preventDefault();
-        const name = e.currentTarget.querySelector('.popup__input').value;
+        const name = e.currentTarget.querySelector('.popup__input_type_place').value;
         const link = e.currentTarget.querySelector('.popup__input_type_url').value;
     }
 
