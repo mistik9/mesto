@@ -75,17 +75,20 @@ const profileJob = document.querySelector(".profile__info-job"); // работа
 const nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
 const jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
 const formAddProfile = popupProfile.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
+
+//валидатор попапа редактировать профиль
 const validatorFormAddProfile = new FormValidator(validationConfig, formAddProfile);
+validatorFormAddProfile.enableValidation();
 
 // попап редактировать профиль
-function callPopupProfile(e) {
-
-  validatorFormAddProfile.enableValidation();
-  nameInput.value = profileName.textContent;
+function callPopupProfile() {
+ validatorFormAddCard.enableSubmitButton();
+    nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
 }
 popupEditButton.addEventListener("click", callPopupProfile);
+
 
 // отправка формы
 function changeProfile(e) {
@@ -97,12 +100,15 @@ function changeProfile(e) {
 formAddProfile.addEventListener("submit", changeProfile);
 
 
+
 //Попап добавить картинку
 const popupAdd = document.querySelector("#popup_add"); // попап форма добавления картинки
 const formAddCard = popupAdd.querySelector(".popup__content"); // форма попап добавление карточки на которой вызывается событие submit
 const popupImage = document.querySelector("#popup_image"); // картинка в попапе
 const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
+validatorFormAddCard.enableValidation();
 
+//просмотр имеющейся карточки
 function callPopupImage(name, link) {
   document.querySelector(".popup__image").src = link
   document.querySelector(".popup__image").alt = name;
@@ -111,7 +117,7 @@ function callPopupImage(name, link) {
 
 }
 
-
+//создание карточки из класса
 function createCard(data) {
   const card = new Card(data, "#element-template", callPopupImage);
   return card.generateItem();
@@ -120,27 +126,28 @@ function createCard(data) {
 
 //загрузка имеющихся карточек
 initialCards.forEach((item) => {
-  createCard(item);
+  let cardElement = createCard(item);
   document.querySelector(".elements__container").append(cardElement);
 })
 
-// функция добавление карточки
+// открытие попапа добавить карточку
 function callPopupAdd() {
-  validatorFormAddCard.enableValidation();
   openPopup(popupAdd);
 }
 document.querySelector(".profile__add-button").addEventListener("click", callPopupAdd);
 
 
-// добавление карточки
+// функция добавление карточки
 function addNewItem(e) {
   e.preventDefault();
-  const name = document.querySelector(".popup__input_type_place").value;
-  const link = document.querySelector(".popup__input_type_url").value;
-  const cardElement = card.generateItem(name, link);
+  let item = {
+    name: document.querySelector(".popup__input_type_place").value,
+    link: document.querySelector(".popup__input_type_url").value,
+  }
+  let cardElement = createCard(item);
   closePopup(popupAdd);
   formAddCard.reset();
-  validatorFormAddCard.toggleButtonState();
+  validatorFormAddCard.disableSubmitButton();
   document.querySelector(".elements__container").prepend(cardElement);
 }
 

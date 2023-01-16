@@ -11,6 +11,7 @@ export class FormValidator {
     this._button = this._form.querySelector(this._submitButtonSelector);
   }
 
+//показать ошибку
   _showError(input) {
     const error = this._form.querySelector(`#${input.id}-error`);
     error.textContent = input.validationMessage;
@@ -18,6 +19,7 @@ export class FormValidator {
     input.classList.add(this._inputErrorClass);
   };
 
+  //спрятать ошибку
   _hideError(input) {
     const error = this._form.querySelector(`#${input.id}-error`);
     error.textContent = "";
@@ -34,35 +36,43 @@ export class FormValidator {
     }
   };
 
-  //переключатель кнопки
-  toggleButtonState() {
-    const isFormValid = this._inputs.every((input) => input.validity.valid);
-    if (isFormValid) {
-      //кнопка активна
-      this._button.classList.remove(this._inactiveButtonClass);
-      this._button.disabled = false;
-    } else {
-      //кнопка неактивна
-      this._button.classList.add(this._inactiveButtonClass);
-      this._button.disabled = true;
-    }
-  };
 
   _setEventListener() {
     this._inputs.forEach((input) => {
-        input.addEventListener("input", () => {
-          this._checkInputValidity(input);
-          this.toggleButtonState();
-        });
+      input.addEventListener("input", () => {
+        this._checkInputValidity(input);
+        this.enableSubmitButton();
+        this.disableSubmitButton();
       });
-      
-  }
+    });
 
+  }
+//включить валидацию
   enableValidation() {
     this._setEventListener()
 
   };
+
+  disableSubmitButton() {
+    //кнопка неактивна
+    const isFormValid = this._inputs.every((input) => input.validity.valid);
+    if (!isFormValid) {
+      this._button.classList.add(this._inactiveButtonClass);
+      this._button.disabled = true;
+    }
+  }
+
+  //кнопка активна
+  enableSubmitButton() {
+    const isFormValid = this._inputs.every((input) => input.validity.valid);
+    if (isFormValid) {
+      this._button.classList.remove(this._inactiveButtonClass);
+      this._button.disabled = false;
+    }
+  };
+
 }
+
 
 
 

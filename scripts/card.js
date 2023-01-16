@@ -26,20 +26,20 @@ export class Card {
         return this._element
     }
 
-    _likeElement(e) {
-        e.target.classList.toggle("element__bottom-like_active");
+    _likeElement() {
+        this._element.querySelector(".element__bottom-like").classList.toggle("element__bottom-like_active");
     }
 
-    _handleDeleteItem(e) {
-        e.target.parentNode.remove();
+    _handleDeleteItem() {
+        this._element.remove();
     }
 
     _setEventListeners() {
-        this._element.querySelector(".element__bottom-like").addEventListener("click", (e) => {
-            this._likeElement(e);
+        this._element.querySelector(".element__bottom-like").addEventListener("click", () => {
+            this._likeElement();
         });
-        this._element.querySelector(".element__delete").addEventListener("click", (e) => {
-            this._handleDeleteItem(e);
+        this._element.querySelector(".element__delete").addEventListener("click", () => {
+            this._handleDeleteItem();
         });
         this._element.querySelector(".element__image").addEventListener("click", () => {
             this._callPopupImage(this._name, this._link);
