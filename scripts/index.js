@@ -111,11 +111,16 @@ function callPopupImage(name, link) {
 
 }
 
-const card = new Card("#element-template", callPopupImage);
+
+function createCard(data) {
+  const card = new Card(data, "#element-template", callPopupImage);
+  return card.generateItem();
+}
+
 
 //загрузка имеющихся карточек
 initialCards.forEach((item) => {
-  const cardElement = card.generateItem(item.name, item.link);
+  createCard(item);
   document.querySelector(".elements__container").append(cardElement);
 })
 

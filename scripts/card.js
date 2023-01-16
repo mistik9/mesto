@@ -1,9 +1,11 @@
 
 export class Card {
 
-    constructor(templateSelector, callPopupImage) {
+    constructor(data, templateSelector, callPopupImage) {
         this._templateSelector = templateSelector;
         this._callPopupImage = callPopupImage;
+        this._name = data.name;
+        this._link = data.link;
     }
 
     _getTemplate() {
@@ -15,12 +17,12 @@ export class Card {
         return cardElement;
     }
 
-    generateItem(name, link) {
+    generateItem() {
         this._element = this._getTemplate();
-        this._setEventListeners(name, link);
-        this._element.querySelector(".element__bottom-title").textContent = name;
-        this._element.querySelector(".element__image").src = link;
-        this._element.querySelector(".element__image").alt = name;
+        this._setEventListeners();
+        this._element.querySelector(".element__bottom-title").textContent = this._name;
+        this._element.querySelector(".element__image").src = this._link;
+        this._element.querySelector(".element__image").alt = this._name;
         return this._element
     }
 
@@ -32,7 +34,7 @@ export class Card {
         e.target.parentNode.remove();
     }
 
-    _setEventListeners(name, link) {
+    _setEventListeners() {
         this._element.querySelector(".element__bottom-like").addEventListener("click", (e) => {
             this._likeElement(e);
         });
@@ -40,7 +42,7 @@ export class Card {
             this._handleDeleteItem(e);
         });
         this._element.querySelector(".element__image").addEventListener("click", () => {
-            this._callPopupImage(name, link);
+            this._callPopupImage(this._name, this._link);
         });
 
     }
