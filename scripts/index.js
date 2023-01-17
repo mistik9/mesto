@@ -140,11 +140,11 @@ document.querySelector(".profile__add-button").addEventListener("click", callPop
 // функция добавление карточки
 function addNewItem(e) {
   e.preventDefault();
-  let item = {
+  const item = {
     name: document.querySelector(".popup__input_type_place").value,
     link: document.querySelector(".popup__input_type_url").value,
   }
-  let cardElement = createCard(item);
+  const cardElement = createCard(item);
   closePopup(popupAdd);
   formAddCard.reset();
   validatorFormAddCard.disableSubmitButton();
