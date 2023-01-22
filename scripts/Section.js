@@ -1,16 +1,21 @@
 export class Section {
-    constructor ({items, renderer},templateSelector){
-    this._initialCards = items;
-    this._container = document.querySelector(templateSelector);
+    constructor({ items, renderer }, selector) {
+        this._initialCards = items;
+        this._renderer = renderer;
+        this._container = document.querySelector(selector);
+
     }
-    renderer(){
-        this._initialCards.forEach((item) => {
-            let cardElement = createCard(item);
-            this.addItem(cardElement);
-        });
+    renderItems() {
+        this._initialCards.forEach(item =>
+            this._renderer(item)
+            
+
+        );
     }
-    addItem(element){
-        this._container .append(element);
-        
+    addItem(item) {
+        this._container.append(item);
+      
+
+ 
     }
 }
