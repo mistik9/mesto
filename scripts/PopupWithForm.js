@@ -1,23 +1,31 @@
 import { Popup } from './Popup.js'
 import { formAddProfile } from './index.js'
+
 export class PopupWithForm extends Popup {
-//     constructor(selector, changeProfile) {
-//         super(selector)
-//         this._changeProfile = changeProfile
-//     }
+    constructor(popupSelector, changeProfile) {
+        super(popupSelector);
+        this._changeProfile = changeProfile;
+        this._inputs = Array.from(this._popupSelector.querySelector('.popup__input'));
+    }
 
-//     _getInputValues() {
-// this._nameInput = this._popupSelector.querySelector(".popup__input_type_name")
-// this._jobInput = this._popupSelector.querySelector(".popup__input_type_job")
-//     }
+    _getInputValues() {
+        console.log(111)
+   const inputValues = {};
+   this._inputs.forEach((input) =>{
+    inputValues[input.name] = intup.value
+   })
+   return inputValues
+    }
 
-//     setEventListeners() {
-//         this._popupSelector.addEventListener("submit", this._changeProfile)
-//         super.setEventListeners()
-//     }
-    
-    // close() {
-    //     formAddProfile.reset()
-    //     super.close()
-    // }
+    setEventListeners() {
+        super.setEventListeners()
+        this._popupSelector.addEventListener("submit", () => {this._changeProfile})
+
+    }
+
+
+    close() {
+        formAddProfile.reset()
+        super.close()
+    }
 }

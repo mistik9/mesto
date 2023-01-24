@@ -3,6 +3,7 @@ import { FormValidator } from "./FormValidator.js";
 import { Section } from "./Section.js";
 import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
 
 const initialCards = [
   {
@@ -56,17 +57,18 @@ const validatorFormAddProfile = new FormValidator(validationConfig, formAddProfi
 validatorFormAddProfile.enableValidation();
 
 //попап редактировать профиль
-const popupEditProfile = new Popup(popupProfile)
+const popupEditProfile = new PopupWithForm(popupProfile)
+popupEditButton.addEventListener("click",()=> popupEditProfile.open(nameInput, jobInput));
 popupEditProfile.setEventListeners()
 
-// функция редактировать профиль
-function callPopupProfile() {
-  validatorFormAddCard.enableSubmitButton();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
-  popupEditProfile.open();
-}
-popupEditButton.addEventListener("click", callPopupProfile);
+// // функция редактировать профиль
+// function callPopupProfile() {
+//   validatorFormAddCard.enableSubmitButton();
+//   nameInput.value = profileName.textContent;
+//   jobInput.value = profileJob.textContent;
+//   popupEditProfile.open();
+// }
+
 
 // отправка формы
 function changeProfile(e) {
@@ -79,39 +81,33 @@ formAddProfile.addEventListener("submit", changeProfile);
 
 
 
-//Попап добавить картинку
+
 const popupAdd = document.querySelector("#popup_add"); // попап форма добавления картинки
 const formAddCard = popupAdd.querySelector(".popup__content"); // форма попап добавление карточки на которой вызывается событие submit
-export const popupImage = document.querySelector("#popup_image"); // картинка в попапе
+const popupImage = document.querySelector("#popup_image"); // картинка в попапе
 
 const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
 validatorFormAddCard.enableValidation();
 
+// открытие попапа добавить карточку
+const popupAddImage = new PopupWithForm(popupAdd)
+popupAddImage.setEventListeners()
 
-//  const popupOpenImage = new Popup(popupImage)
-//  popupOpenImage.setEventListeners()
+function callPopupAdd() {
+  popupAddImage.open();
+}
+document.querySelector(".profile__add-button").addEventListener("click", callPopupAdd);
 
 
+//Попап просмотреть картинку
 const popupWithImage = new PopupWithImage(popupImage)
 const callPopupImage = (name,link) =>{
 popupWithImage.open(name, link)};
 
 popupWithImage.setEventListeners()
 
-// //просмотр имеющейся карточки
-// function callPopupImage(name, link) {
-//   document.querySelector(".popup__image").src = link
-//   document.querySelector(".popup__image").alt = name;
-//   document.querySelector(".popup__discription").textContent = name;
-//   popupOpenImage.open();
 
-
-// //создание карточки из класса
-// function createCard(data) {
-//   const card = new Card(data, "#element-template", callPopupImage);
-//   return card.generateItem();
-// }
-
+//Загрузка карточек
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -126,39 +122,6 @@ const cardList = new Section({
 cardList.renderItems();
 
 
-
-// //загрузка имеющихся карточек
-// initialCards.forEach((item) => {
-//   
-//   document.querySelector(".elements__container").append(cardElement);
-// })
-
-const popupAddImage = new Popup(popupAdd)
-popupAddImage.setEventListeners()
-
-
-// открытие попапа добавить карточку
-function callPopupAdd() {
-  popupAddImage.open();
-}
-document.querySelector(".profile__add-button").addEventListener("click", callPopupAdd);
-
-
-// // функция добавление карточки
-// function addNewItem(e) {
-//   e.preventDefault();
-//   const item = {
-//     name: document.querySelector(".popup__input_type_place").value,
-//     link: document.querySelector(".popup__input_type_url").value,
-//   }
-//   const cardElement = createCard(item);
-//   closePopup(popupAdd);
-//   formAddCard.reset();
-//   validatorFormAddCard.disableSubmitButton();
-//   document.querySelector(".elements__container").prepend(cardElement);
-// }
-
-// formAddCard.addEventListener("submit", addNewItem);
 
 
 
