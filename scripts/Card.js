@@ -1,9 +1,9 @@
 
 export class Card {
 
-    constructor(data, templateSelector, callPopupImage) {
+    constructor(data, templateSelector, handleCardClick) {
         this._templateSelector = templateSelector;
-        this._callPopupImage = callPopupImage;
+        this._handleCardClick = handleCardClick;
         this._name = data.name;
         this._link = data.link;
     }
@@ -44,7 +44,7 @@ export class Card {
             this._handleDeleteItem();
         });
         this._elementImg.addEventListener("click", () => {
-            this._callPopupImage(this._name, this._link);
+            this._handleCardClick(this._name, this._link);
         });
 
     }

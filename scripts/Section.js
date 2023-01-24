@@ -8,14 +8,9 @@ export class Section {
     renderItems() {
         this._initialCards.forEach(item =>
             this._renderer(item)
-            
-
         );
     }
     addItem(item) {
         this._container.append(item);
-      
-
- 
     }
 }

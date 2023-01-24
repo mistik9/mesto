@@ -38,32 +38,3 @@ export class Popup {
     }
 }
 
-// //функция закрытия попапа
-// function closePopup(popup) {
-//   popup.classList.remove("popup_opened");
-//   document.removeEventListener("keydown", closeByEsc);
-// };
-
-
-// //функция открытия попапа
-// function openPopup(popup) {
-//   popup.classList.add("popup_opened");
-//   document.addEventListener("keydown", closeByEsc);
-// }
-
-// //закрытие попапа по клавише эск
-// function closeByEsc(evt) {
-//   if (evt.key === "Escape") {
-//     const openedPopup = document.querySelector(".popup_opened");
-//     closePopup(openedPopup);
-//   }
-// }
-
-// //закрытие попапа на оверлей и кнопку закрыть
-// document.querySelectorAll(".popup").forEach(popup => {
-//   popup.addEventListener("mousedown", (evt) => {
-//     if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close")) {
-//       closePopup(popup);
-//     };
-//   });
-// });
