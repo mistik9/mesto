@@ -75,7 +75,7 @@ function changeProfile(e) {
   profileJob.textContent = jobInput.value;
   popupEditProfile.close();
 }
- formAddProfile.addEventListener("submit", changeProfile);
+formAddProfile.addEventListener("submit", changeProfile);
 
 
 
@@ -83,28 +83,28 @@ function changeProfile(e) {
 const popupAdd = document.querySelector("#popup_add"); // попап форма добавления картинки
 const formAddCard = popupAdd.querySelector(".popup__content"); // форма попап добавление карточки на которой вызывается событие submit
 export const popupImage = document.querySelector("#popup_image"); // картинка в попапе
+
 const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
 validatorFormAddCard.enableValidation();
 
 
- const popupOpenImage = new Popup(popupImage)
- popupOpenImage.setEventListeners()
+//  const popupOpenImage = new Popup(popupImage)
+//  popupOpenImage.setEventListeners()
 
 
-// const popupWithImage= new PopupWithImage(popupImage)
-// const handleCardClick = () => {
-//   popupWithImage.open()
-// }
-// popupWithImage.setEventListeners()
+const popupWithImage = new PopupWithImage(popupImage)
+const callPopupImage = (name,link) =>{
+popupWithImage.open(name, link)};
 
-//просмотр имеющейся карточки
-function callPopupImage(name, link) {
-  document.querySelector(".popup__image").src = link
-  document.querySelector(".popup__image").alt = name;
-  document.querySelector(".popup__discription").textContent = name;
-  popupOpenImage.open();
+popupWithImage.setEventListeners()
 
-}
+// //просмотр имеющейся карточки
+// function callPopupImage(name, link) {
+//   document.querySelector(".popup__image").src = link
+//   document.querySelector(".popup__image").alt = name;
+//   document.querySelector(".popup__discription").textContent = name;
+//   popupOpenImage.open();
+
 
 // //создание карточки из класса
 // function createCard(data) {
