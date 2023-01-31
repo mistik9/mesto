@@ -6,44 +6,8 @@ import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
-
-
-
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
-const validationConfig = {
-  formSelector: ".popup__content",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__save",
-  inactiveButtonClass: "popup__save_invalid",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "error",
-}
+import { initialCards } from "./constants.js";
+import { validationConfig } from "./constants.js";
 
 //Попап профиль
 const popupEditButton = document.querySelector(".profile__edit-button"); // кнопка открыть попап слева
@@ -57,13 +21,13 @@ validatorFormAddProfile.enableValidation();
 
 const profileName = ".profile__info-name"; // имя профиля со страницы
 const profileJob = ".profile__info-job"; // работа профиля со страницы
+const nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
+const jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
 const userInfo = new UserInfo({ profileName, profileJob });
 
 //попап редактировать профиль
 const popupEditProfile = new PopupWithForm(popupProfile, changeProfile);
 popupEditButton.addEventListener("click", () => {
-  const nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
-  const jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
   const userInfoOnPage = userInfo.getUserInfo();
   nameInput.value = userInfoOnPage.name;
   jobInput.value = userInfoOnPage.job;
@@ -96,7 +60,7 @@ popupWithImage.setEventListeners()
 function createCard(item) {
   const card = new Card(item, "#element-template", handleCardClick);
   return card.generateItem();
- 
+
 }
 
 //Загрузка карточек 
@@ -117,7 +81,7 @@ popupAddImage.setEventListeners()
 
 
 function addNewCard(name, link) {
-  const cardElement = createCard({name, link});
+  const cardElement = createCard(name, link);
   document.querySelector(".elements__container").prepend(cardElement);
 }
 

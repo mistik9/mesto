@@ -9,11 +9,14 @@ export class FormValidator {
     this._form = form;
     this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
     this._button = this._form.querySelector(this._submitButtonSelector);
+    console.log(this._inputSelector)
   }
 
 //показать ошибку
   _showError(input) {
     const error = this._form.querySelector(`#${input.id}-error`);
+    console.log(error)
+
     error.textContent = input.validationMessage;
     error.classList.add(this._errorClass);
     input.classList.add(this._inputErrorClass);
