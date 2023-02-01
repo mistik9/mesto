@@ -6,23 +6,17 @@ import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
-import { initialCards } from "./constants.js";
-import { validationConfig } from "./constants.js";
-
-//Попап профиль
-const popupEditButton = document.querySelector(".profile__edit-button"); // кнопка открыть попап слева
-const popupProfile = document.querySelector("#popup_profile"); // попап профиля
+import { initialCards, validationConfig, popupEditButton, 
+  popupProfile, profileName, profileJob, nameInput,
+  jobInput, popupAdd, formAddCard, popupImage } from "./constants.js";
 
 export const formAddProfile = popupProfile.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
 
-//валидатор попапа редактировать профиль
+//валидатор формы редактировать профиль
 const validatorFormAddProfile = new FormValidator(validationConfig, formAddProfile);
 validatorFormAddProfile.enableValidation();
 
-const profileName = ".profile__info-name"; // имя профиля со страницы
-const profileJob = ".profile__info-job"; // работа профиля со страницы
-const nameInput = document.querySelector(".popup__input_type_name"); // поле ввода имени в форме
-const jobInput = document.querySelector(".popup__input_type_job"); // поле ввода работы в форме
+//данные профиля
 const userInfo = new UserInfo({ profileName, profileJob });
 
 //попап редактировать профиль
@@ -40,10 +34,8 @@ function changeProfile(name, job) {
   userInfo.setUserInfo(name, job);
 }
 
-const popupAdd = document.querySelector("#popup_add"); // попап добавления картинки
-const formAddCard = popupAdd.querySelector(".popup__content"); // форма попап добавление карточки на которой вызывается событие submit
-const popupImage = document.querySelector("#popup_image"); // картинка в попапе
 
+//валидатор формы добавить карточку
 const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
 validatorFormAddCard.enableValidation();
 
@@ -52,15 +44,12 @@ const popupWithImage = new PopupWithImage(popupImage)
 const handleCardClick = (name, link) => {
   popupWithImage.open(name, link)
 };
-
 popupWithImage.setEventListeners()
-
 
 //создание карточки из класса
 function createCard(item) {
   const card = new Card(item, "#element-template", handleCardClick);
   return card.generateItem();
-
 }
 
 //Загрузка карточек 
@@ -79,7 +68,7 @@ const popupAddImage = new PopupWithForm(popupAdd, addNewCard)
 document.querySelector(".profile__add-button").addEventListener("click", () => popupAddImage.open());
 popupAddImage.setEventListeners()
 
-
+//функция добавить картинку
 function addNewCard(name, link) {
   const cardElement = createCard(name, link);
   document.querySelector(".elements__container").prepend(cardElement);
