@@ -6,9 +6,10 @@ import { Popup } from "./Popup.js";
 import { PopupWithImage } from "./PopupWithImage.js";
 import { PopupWithForm } from "./PopupWithForm.js";
 import { UserInfo } from "./UserInfo.js";
-import { initialCards, validationConfig, popupEditButton, 
+import {
+  initialCards, validationConfig, popupEditButton,
   popupProfile, profileName, profileJob, nameInput,
-  jobInput, popupAdd, formAddCard, popupImage } from "./constants.js";
+  jobInput, formAddCard } from "./constants.js";
 
 export const formAddProfile = popupProfile.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
 
@@ -25,25 +26,24 @@ popupEditButton.addEventListener("click", () => {
   const userInfoOnPage = userInfo.getUserInfo();
   nameInput.value = userInfoOnPage.name;
   jobInput.value = userInfoOnPage.job;
-  console.log(nameInput.value)
   popupEditProfile.open();
 });
 popupEditProfile.setEventListeners()
 
 // изменение профиля
-function changeProfile(name, job) {
-  userInfo.setUserInfo(name, job);
+function changeProfile(data) {
+  userInfo.setUserInfo(data);
 }
-
 
 //валидатор формы добавить карточку
 const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
 validatorFormAddCard.enableValidation();
 
+
 //Попап просмотреть картинку
 const popupWithImage = new PopupWithImage("#popup_image")
 const handleCardClick = (name, link) => {
-  popupWithImage.open(name, link)
+  popupWithImage.open(name, link);
 };
 popupWithImage.setEventListeners()
 
@@ -66,12 +66,18 @@ cardList.renderItems();
 
 // открытие попапа добавить карточку
 const popupAddImage = new PopupWithForm("#popup_add", addNewCard)
-document.querySelector(".profile__add-button").addEventListener("click", () => popupAddImage.open());
+document.querySelector(".profile__add-button").addEventListener("click", () => 
+{ 
+  validatorFormAddCard.disableSubmitButton();
+  popupAddImage.open();
+});
 popupAddImage.setEventListeners()
 
 //функция добавить картинку
-function addNewCard(name, link) {
-  const cardElement = createCard(name, link);
+function addNewCard(item) {
+  const cardElement = createCard(item);
+  
+
   cardList.addItem(cardElement);
 }
 

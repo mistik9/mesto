@@ -2,10 +2,11 @@
 export class Card {
 
     constructor(data, templateSelector, handleCardClick) {
-        this._templateSelector = templateSelector;
+         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
         this._name = data.name;
         this._link = data.link;
+    
     }
 
     _getTemplate() {
@@ -25,7 +26,7 @@ export class Card {
         this._element.querySelector(".element__bottom-title").textContent = this._name;
         this._elementImg.src = this._link;
         this._elementImg.alt = this._name;
-        return this._element
+              return this._element;
     }
 
     _likeElement() {
@@ -34,6 +35,7 @@ export class Card {
 
     _handleDeleteItem() {
         this._element.remove();
+        this._element = null;
     }
 
     _setEventListeners() {

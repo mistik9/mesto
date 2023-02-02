@@ -9,8 +9,9 @@ export class UserInfo {
     }
 
 
-    setUserInfo(name, job) {
-        this._profileName.textContent = name;
-        this._profileJob.textContent = job;
+    setUserInfo(data) {
+        this._profileName.textContent = data.user;
+        this._profileJob.textContent = data.job;
+       
     }
 }
