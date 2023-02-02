@@ -20,11 +20,12 @@ validatorFormAddProfile.enableValidation();
 const userInfo = new UserInfo({ profileName, profileJob });
 
 //попап редактировать профиль
-const popupEditProfile = new PopupWithForm(popupProfile, changeProfile);
+const popupEditProfile = new PopupWithForm("#popup_profile", changeProfile);
 popupEditButton.addEventListener("click", () => {
   const userInfoOnPage = userInfo.getUserInfo();
   nameInput.value = userInfoOnPage.name;
   jobInput.value = userInfoOnPage.job;
+  console.log(nameInput.value)
   popupEditProfile.open();
 });
 popupEditProfile.setEventListeners()
@@ -40,7 +41,7 @@ const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
 validatorFormAddCard.enableValidation();
 
 //Попап просмотреть картинку
-const popupWithImage = new PopupWithImage(popupImage)
+const popupWithImage = new PopupWithImage("#popup_image")
 const handleCardClick = (name, link) => {
   popupWithImage.open(name, link)
 };
@@ -64,16 +65,15 @@ const cardList = new Section({
 cardList.renderItems();
 
 // открытие попапа добавить карточку
-const popupAddImage = new PopupWithForm(popupAdd, addNewCard)
+const popupAddImage = new PopupWithForm("#popup_add", addNewCard)
 document.querySelector(".profile__add-button").addEventListener("click", () => popupAddImage.open());
 popupAddImage.setEventListeners()
 
 //функция добавить картинку
 function addNewCard(name, link) {
   const cardElement = createCard(name, link);
-  document.querySelector(".elements__container").prepend(cardElement);
+  cardList.addItem(cardElement);
 }
-
 
 
 
