@@ -1,7 +1,7 @@
 export class Popup {
     constructor(popupSelector) {
-        this._popupSelector = document.querySelector(popupSelector);
-        this._handleEscClose = this._handleEscClose.bind(this)
+        this._popup = document.querySelector(popupSelector);
+        this._handleEscClose = this._handleEscClose.bind(this);
 
     }
 
