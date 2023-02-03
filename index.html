@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Место</title>
+<script defer src="main.js"></script><link href="main.css" rel="stylesheet"></head>
+
+<body class="page">
+  <header class="header">
+    <img src="images/logo.03b78ada3425e9132ff3.svg" alt="лого" class="header__logo">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__avatar"></div>
+      <div class="profile__info">
+        <h1 class="profile__info-name">Жак-Ив Кусто </h1>
+        <button class="profile__edit-button" type="button" aria-label="Edit profile"></button>
+        <p class="profile__info-job">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button" type="button"><img src="images/add.d86bb2edc2f6eadb96b7.svg" alt="кнопка добавить"></button>
+    </section>
+    <section class="elements">
+      <ul class="elements__container">
+      </ul>
+    </section>
+  </main>
+  <section class="popup" id="popup_profile">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__content">
+        <input type="text" id="user" placeholder="Имя" class="popup__input popup__input_type_name" required
+          minlength="2" maxlength="40">
+        <span id="user-error" class="error"></span>
+        <input type="text" id="job" placeholder="Работа" class="popup__input popup__input_type_job" required
+          minlength="2" maxlength="200">
+        <span id="job-error" class="error"></span>
+        <button class="popup__save" type="submit">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </section>
+  <section class="popup" id="popup_add">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__content">
+        <input type="text" id="name" placeholder="Название" class="popup__input popup__input_type_place" required
+          minlength="2" maxlength="30">
+        <span id="name-error" class="error"></span>
+        <input type="url" id="link" placeholder="Ссылка на картинку" class="popup__input popup__input_type_url"
+          required>
+        <span id="link-error" class="error"></span>
+        <button class="popup__save popup__save_invalid" type="submit">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </section>
+  <section class="popup" id="popup_image">
+    <div class="popup__container popup__container_image">
+      <button class="popup__close" type="button"></button>
+      <img class="popup__image" src="#" alt="alt">
+      <p class="popup__discription"></p>
+    </div>
+  </section>
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+  <template id="element-template">
+    <li class="element">
+      <button class="element__delete" type="button"></button>
+      <img class="element__image" src="src" alt="alt">
+      <div class="element__bottom">
+        <p class="element__bottom-title"></p>
+        <button class="element__bottom-like" type="button"></button>
+      </div>
+    </li>
+  </template>
+
+</body>
+
+</html>
