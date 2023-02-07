@@ -65,7 +65,17 @@ class Api {
             })
     }
 
+    doLike(_id) {
+        return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
+            method: 'PUT',
+            headers: {
+              authorization: this._token
+            }
+          })
+    }
 }
+
+
 
 export const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
