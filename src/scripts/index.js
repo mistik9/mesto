@@ -70,20 +70,19 @@ function createCard(item) {
 const cardList = new Section({
 
   renderer: (data) => {
-    const cardElement = createCard(data)
-    cardList.addItem(cardElement);
+      cardList.addItem(createCard(data));
   }
 
 }, ".elements__container");
+
 api.getInitialCards()
   .then(res => {
-    console.log(res)
-    cardList.renderItems(res)
+      cardList.renderItems(res)
   })
 
 
 // открытие попапа добавить карточку
-const popupAddImage = new PopupWithForm("#popup_add", addNewCard)
+const popupAddImage = new PopupWithForm("#popup_add", addCard)
 document.querySelector(".profile__add-button").addEventListener("click", () => {
   validatorFormAddCard.disableSubmitButton();
   popupAddImage.open();
@@ -91,12 +90,15 @@ document.querySelector(".profile__add-button").addEventListener("click", () => {
 popupAddImage.setEventListeners()
 
 //функция добавить картинку
-function addNewCard(item) {
-  const cardElement = createCard(item);
-
-
-  cardList.addItem(cardElement);
-}
+function addCard(data) {
+api.addNewCard(data)
+.then(res => {
+   cardList.addItem(createCard(res))
+  })
+  .catch(error => {
+    console.log('Карточка не добавлена')
+  })
+ }
 
 
 

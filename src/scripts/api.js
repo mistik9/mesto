@@ -21,7 +21,7 @@ class Api {
                 console.log(err);
             })
     }
-    updateUserData(data) {
+    updateUserData() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
@@ -31,6 +31,28 @@ class Api {
             body: JSON.stringify({
                 name: 'Marie Skłodowska Curie',
                 about: 'Physicist and Chemist'
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    addNewCard(data) {
+        return fetch(`${this._baseUrl}/cards`, {
+            method: 'POST',
+            headers: {
+                authorization: this._token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
             })
         })
             .then(res => {
