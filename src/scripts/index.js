@@ -10,8 +10,10 @@ import {
   initialCards, validationConfig, popupEditButton,
   popupProfile, profileName, profileJob, nameInput,
   jobInput, formAddCard } from "./constants.js";
+import { api } from './api.js';
 
 export const formAddProfile = popupProfile.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
+export { api} from "./api.js";
 
 //валидатор формы редактировать профиль
 const validatorFormAddProfile = new FormValidator(validationConfig, formAddProfile);
@@ -55,14 +57,19 @@ function createCard(item) {
 
 //Загрузка карточек 
 const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item)
+ 
+   renderer: (data) => {
+    const cardElement = createCard(data)
     cardList.addItem(cardElement);
-  }
+  } 
+ 
 }, ".elements__container");
+api.getInitialCards()
+.then(res =>{
+  console.log(res)
+  cardList.renderItems(res)
+})
 
-cardList.renderItems();
 
 // открытие попапа добавить карточку
 const popupAddImage = new PopupWithForm("#popup_add", addNewCard)
@@ -80,6 +87,7 @@ function addNewCard(item) {
 
   cardList.addItem(cardElement);
 }
+
 
 
 
