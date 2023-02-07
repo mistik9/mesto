@@ -29,11 +29,18 @@ class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: data.name,
-                about: data.job
+                name: 'Marie Skłodowska Curie',
+                about: 'Physicist and Chemist'
             })
         })
-       
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
 }
