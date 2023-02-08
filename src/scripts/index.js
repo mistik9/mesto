@@ -46,6 +46,30 @@ function changeProfile(data) {
  ;
 }
 
+// const 
+// //попап редактировать аватар
+// const popupEditAvatar = new PopupWithForm("#popup_avatar", changeAvatar);
+// popupEditButton.addEventListener("click", () => {
+//   const userInfoOnPage = userInfo.getUserInfo();
+//   nameInput.value = userInfoOnPage.name;
+//   aboutInput.value = userInfoOnPage.about;
+//   popupEditProfile.open();
+// });
+// popupEditProfile.setEventListeners()
+
+// // изменение профиля
+// function changeProfile(data) {
+//   api.updateUserData(data)
+//   .then(res => {
+//     console.log(res)
+//     userInfo.setUserInfo(res)
+//   })
+// .catch(error => {
+//   console.log('Ошибочка вышла')
+// })
+//  ;
+// }
+
 
 
 //валидатор формы добавить карточку
