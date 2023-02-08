@@ -43,7 +43,7 @@ class Api {
             })
     }
 
-    updateAvatar() {
+    updateAvatar(data) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
             method: 'PATCH',
             headers: {

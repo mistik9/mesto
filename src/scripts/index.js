@@ -46,29 +46,37 @@ function changeProfile(data) {
  ;
 }
 
-// const 
-// //попап редактировать аватар
-// const popupEditAvatar = new PopupWithForm("#popup_avatar", changeAvatar);
-// popupEditButton.addEventListener("click", () => {
-//   const userInfoOnPage = userInfo.getUserInfo();
-//   nameInput.value = userInfoOnPage.name;
-//   aboutInput.value = userInfoOnPage.about;
-//   popupEditProfile.open();
-// });
-// popupEditProfile.setEventListeners()
+const popupEditAvatarButton = document.querySelector('.profile__edit-avatar-button');
+const profileAvatar = document.querySelector(".profile__avatar")
 
-// // изменение профиля
-// function changeProfile(data) {
-//   api.updateUserData(data)
-//   .then(res => {
-//     console.log(res)
-//     userInfo.setUserInfo(res)
-//   })
-// .catch(error => {
-//   console.log('Ошибочка вышла')
-// })
-//  ;
-// }
+//попап редактировать аватар
+const popupAvatar = document.querySelector('#popup_avatar')
+
+const formEditAvatar = popupAvatar.querySelector(".popup__content")
+const validatorFormEditProfile = new FormValidator(validationConfig, formEditAvatar);
+
+
+
+const popupEditAvatar = new PopupWithForm("#popup_avatar", changeAvatar);
+popupEditAvatarButton.addEventListener("click", () => {
+  validatorFormEditProfile.enableValidation();
+  popupEditAvatar.open();
+  });
+popupEditAvatar.setEventListeners()
+
+// изменение аватара
+function changeAvatar(data) {
+  
+  api.updateAvatar(data)
+  .then(res => {
+     profileAvatar.style.backgroundImage = `res.avatar(${res.avatar})`;
+    console.log(res.avatar)
+     })
+.catch(error => {
+  console.log('Ошибочка вышла')
+})
+ ;
+}
 
 
 
