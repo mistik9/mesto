@@ -85,8 +85,8 @@ const handleCardClick = (name, link) => {
 popupWithImage.setEventListeners()
 
 //создание карточки из класса
-function createCard(item) {
-  const card = new Card(item, "#element-template", handleCardClick);
+function createCard(data) {
+  const card = new Card(data, userInfo.getUserId(),  "#element-template", handleCardClick);
   return card.generateItem();
 }
 

@@ -14,8 +14,11 @@ export class UserInfo {
     setUserInfo(data) {
         this._profileName.textContent = data.name;
         this._profileAbout.textContent = data.about;
-        this._profileAvatar.src = data.avatar;
+        // this._profileAvatar.src = data.avatar;
         this._id = data._id
         
+    }
+    getUserId(){
+        return this._id;
     }
 }
