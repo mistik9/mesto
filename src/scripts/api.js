@@ -21,7 +21,7 @@ class Api {
                 console.log(err);
             })
     }
-    updateUserData() {
+    updateUserData(data) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
@@ -29,8 +29,8 @@ class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: 'Marie Skłodowska Curie',
-                about: 'Physicist and Chemist'
+                name: data.name,
+                about: data.about
             })
         })
             .then(res => {

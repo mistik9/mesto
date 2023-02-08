@@ -46,30 +46,29 @@ function changeProfile(data) {
  ;
 }
 
-const popupEditAvatarButton = document.querySelector('.profile__edit-avatar-button');
-const profileAvatar = document.querySelector(".profile__avatar")
+
+
 
 //попап редактировать аватар
 const popupAvatar = document.querySelector('#popup_avatar')
-
 const formEditAvatar = popupAvatar.querySelector(".popup__content")
+const popupEditAvatarButton = document.querySelector('.profile__edit-avatar-button');
+const profileAvatar = document.querySelector(".profile__avatar")
+
 const validatorFormEditProfile = new FormValidator(validationConfig, formEditAvatar);
-
-
-
 const popupEditAvatar = new PopupWithForm("#popup_avatar", changeAvatar);
+
 popupEditAvatarButton.addEventListener("click", () => {
   validatorFormEditProfile.enableValidation();
   popupEditAvatar.open();
   });
 popupEditAvatar.setEventListeners()
 
-// изменение аватара
+//функция изменение аватара
 function changeAvatar(data) {
-  
-  api.updateAvatar(data)
+    api.updateAvatar(data)
   .then(res => {
-     profileAvatar.style.backgroundImage = `res.avatar(${res.avatar})`;
+    profileAvatar.style.backgroundImage = `url('${res.avatar}')`;
     console.log(res.avatar)
      })
 .catch(error => {
@@ -77,13 +76,6 @@ function changeAvatar(data) {
 })
  ;
 }
-
-
-
-//валидатор формы добавить карточку
-const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
-validatorFormAddCard.enableValidation();
-
 
 //Попап просмотреть картинку
 const popupWithImage = new PopupWithImage("#popup_image")
@@ -100,18 +92,18 @@ function createCard(item) {
 
 //Загрузка карточек 
 const cardList = new Section({
-
   renderer: (data) => {
       cardList.addItem(createCard(data));
   }
-
 }, ".elements__container");
-
 api.getInitialCards()
   .then(res => {
       cardList.renderItems(res)
   })
 
+//валидатор формы добавить карточку
+const validatorFormAddCard = new FormValidator(validationConfig, formAddCard);
+validatorFormAddCard.enableValidation();
 
 // открытие попапа добавить карточку
 const popupAddImage = new PopupWithForm("#popup_add", addCard)
