@@ -44,7 +44,9 @@
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__bottom/element__bottom.css);
 @import url(../blocks/element/__bottom-title/element__bottom-title.css);
+@import url(../blocks/element/__bottom-like-container/element__bottom-like-container.css);
 @import url(../blocks/element/__bottom-like/element__bottom-like.css);
+@import url(../blocks/element/__bottom-like-counter/element__bottom-like-counter.css);
 @import url(../blocks/element/__bottom-like/__bottom-like_active/element__bottom-like\ _active.css);
 @import url(../blocks/element/__delete/element__delete.css);
 
