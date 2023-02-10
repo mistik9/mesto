@@ -16,3 +16,7 @@ export const aboutInput = document.querySelector(".popup__input_type_about"); //
 export const popupAdd = document.querySelector("#popup_add"); // попап добавления картинки
 export const formAddCard = popupAdd.querySelector(".popup__content"); // форма попап добавление карточки на которой вызывается событие submit
 export const popupImage = document.querySelector("#popup_image"); // картинка в попапе
+export const popupAvatar = document.querySelector('#popup_avatar')
+export const formEditAvatar = popupAvatar.querySelector(".popup__content")
+export const popupEditAvatarButton = document.querySelector('.profile__edit-avatar-button');
+export const profileAvatar = ".profile__avatar"

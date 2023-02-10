@@ -21,6 +21,23 @@ class Api {
                 console.log(err);
             })
     }
+
+    getUserData() {
+        return fetch(`${this._baseUrl}/users/me`, {
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
     updateUserData(data) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
@@ -94,7 +111,34 @@ class Api {
             }
         })
     }
+
+    doDislike(_id) {
+        return fetch(`${this._baseUrl}/cards/likes/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token
+            }
+        })
+    }
+
+    deleteCard(_id) {
+        return fetch(`${this._baseUrl}/cards/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: this._token
+            }
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 }
+
 
 
 

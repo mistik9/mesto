@@ -1,7 +1,7 @@
 
 export class Card {
 
-    constructor({ data, userId, handleCardClick, handleCardDelete }, templateSelector) {
+    constructor({ data, userId, handleCardClick, handleDeleteClick, handleLikeClick }, templateSelector) {
         this._name = data.name;
         this._link = data.link;
         this._id = data._id;
@@ -9,7 +9,8 @@ export class Card {
         this._owner = data.owner._id;
         this._userId = userId;
         this._handleCardClick = handleCardClick;
-        this._handleCardDelete = handleCardDelete
+        this._handleDeleteClick = handleDeleteClick;
+        this._handleLikeClick = handleLikeClick;
         this._templateSelector = templateSelector;
 
     }
@@ -28,7 +29,7 @@ export class Card {
         this._elementImg = this._element.querySelector(".element__image");
         this._elementLikeBtn = this._element.querySelector(".element__bottom-like");
         this._likeCounter = this._element.querySelector(".element__bottom-like-counter");
-        this._deleteIcon= this._element.querySelector(".element__delete")
+        this._deleteIcon = this._element.querySelector(".element__delete")
         this._element.querySelector(".element__bottom-title").textContent = this._name;
         this._likeCounter.textContent = this._like;
         this._elementImg.src = this._link;
@@ -38,33 +39,38 @@ export class Card {
         return this._element;
     }
     _checkDeleteState() {
-        if(this._owner !== this._userId){
+        if (this._owner !== this._userId) {
             this._deleteIcon.remove()
         }
     }
 
-    _likeElement() {
+    likeElement() {
         this._elementLikeBtn.classList.add("element__bottom-like_active");
         this._likeCounter.textcontent = ++this._like
     }
 
-    _dislikeElement() {
+    dislikeElement() {
         this._elementLikeBtn.classList.remove("element__bottom-like_active");
         this._likeCounter.textcontent = --this._like
     }
-    _handleDeleteItem() {
+
+    checkLikeState() {
+        return this._elementLikeBtn.classList.contains("element__bottom-like_active");
+    }
+
+    deleteCard() {
         this._element.remove();
         this._element = null;
     }
 
 
-
     _setEventListeners() {
         this._elementLikeBtn.addEventListener("click", () => {
-            this._likeElement();
+            this.checkLikeState();
         });
         this._deleteIcon.addEventListener("click", () => {
-            this._handleCardDelete();
+            this._handleDeleteClick();
+
         });
         this._elementImg.addEventListener("click", () => {
             this._handleCardClick(this._name, this._link);
