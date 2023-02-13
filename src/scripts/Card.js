@@ -6,6 +6,7 @@ export class Card {
         this._link = data.link;
         this._id = data._id;
         this._like = data.likes.length;
+        console.log(data.likes.length)
         this._owner = data.owner._id;
         this._userId = userId;
         this._handleCardClick = handleCardClick;
@@ -38,6 +39,7 @@ export class Card {
         this._checkDeleteState();
         return this._element;
     }
+
     _checkDeleteState() {
         if (this._owner !== this._userId) {
             this._deleteIcon.remove()
@@ -66,7 +68,7 @@ export class Card {
 
     _setEventListeners() {
         this._elementLikeBtn.addEventListener("click", () => {
-            this.checkLikeState();
+            this._handleLikeClick();
         });
         this._deleteIcon.addEventListener("click", () => {
             this._handleDeleteClick();

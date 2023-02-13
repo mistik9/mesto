@@ -20,7 +20,6 @@ export const formEditProfile = popupProfile.querySelector(".popup__content"); //
 export { api } from "./api.js";
 
 
-
 //валидаторы
 const validatorFormEditProfile = new FormValidator(validationConfig, formEditProfile);
 validatorFormEditProfile.enableValidation();
@@ -91,17 +90,20 @@ function createCard(data) {
       },
       handleDeleteClick: () => {
         popupDelete.open();
-        popupDelete.setId(card._id);
-        card.deleteCard();
+        popupDelete.delcard = function () {
+          api.deleteCard(card._id)
+            .then(() => {
+              card.deleteCard()
+              popupDelete.close()
+            }).catch(error => console.log('Карточка не удалена'));
+        }
+          
       },
       handleLikeClick: () => {
-        console.log(111)
-        if (!card.checkLikeState()) {
+        if (card.checkLikeState()) {
           api.doDislike(card._id)
             .then(card.dislikeElement())
-            .catch(error => {
-              console.log('Лайк не удалился')
-            })
+            .catch(error => console.log('Лайк не удалился'))
         } else {
           api.doLike(card._id)
             .then(card.likeElement())
@@ -116,17 +118,6 @@ function createCard(data) {
   return card.generateItem();
 }
 
-// function handleDeleteClick() {
-//   console.log(111)
-//   popupDelete.open();
-//    api.deleteCard(card.getId())
-// .then((res)=>{
-// card.deleteCard(res);
-// deletePopup.close()
-// })
-// .catch(error => {
-// console.log('Карточка не добавлена')})
-// }
 
 //Загрузка карточек 
 const cardList = new Section({
@@ -140,8 +131,6 @@ api.getInitialCards()
   .then(res => {
     cardList.renderItems(res)
   })
-
-
 
 // открытие попапа добавить карточку
 const popupAddImage = new PopupWithForm("#popup_add", addCard)
@@ -163,15 +152,8 @@ function addCard(data) {
 }
 
 // открытие попапа удалить карточку
-const popupDelete = new PopupWithDelete('#popup_delete', delCard);
+const popupDelete = new PopupWithDelete('#popup_delete');
 popupDelete.setEventListeners();
-
-function delCard (id) {
-  api.deleteCard(id)
-          .then(res => console.log(res))
-          .catch(error => console.log('Карточка не удаленаа'));
-}
-
 
 // загрузка данных 
 Promise.all([api.getUserData(), api.getInitialCards()])

@@ -110,6 +110,14 @@ class Api {
                 authorization: this._token
             }
         })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     doDislike(_id) {
@@ -119,6 +127,14 @@ class Api {
                 authorization: this._token
             }
         })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     deleteCard(_id) {
