@@ -1,23 +1,23 @@
 import './../pages/index.css';
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { Section } from "./Section.js";
-import { Popup } from "./Popup.js";
-import { PopupWithImage } from "./PopupWithImage.js";
-import { PopupWithForm } from "./PopupWithForm.js";
-import { PopupWithDelete } from "./PopupWithDelete.js";
+import { Card } from "../scripts/components/Card.js";
+import { FormValidator } from "../scripts/components/FormValidator.js";
+import { Section } from "../scripts/components/Section.js";
+import { Popup } from "../scripts/components/Popup.js";
+import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
+import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
+import { PopupWithDelete } from "../scripts/components/PopupWithDelete.js";
 
-import { UserInfo } from "./UserInfo.js";
+import { UserInfo } from "../scripts/components/UserInfo.js";
 import {
   validationConfig, popupEditButton,
   popupProfile, profileName, profileAbout, nameInput,
   aboutInput, formAddCard, popupAvatar, formEditAvatar,
   popupEditAvatarButton, profileAvatar
-} from "./constants.js";
-import { api } from './api.js';
+} from "../scripts/constants.js";
+import { api } from '../scripts/components/api.js';
 
 export const formEditProfile = popupProfile.querySelector(".popup__content"); // форма попап профиля на которой вызывается событие submit
-export { api } from "./api.js";
+export { api } from "../scripts/components/api.js";
 
 
 //валидаторы
@@ -46,6 +46,7 @@ popupEditProfile.setEventListeners()
 
 // изменение профиля
 function changeProfile(data) {
+  popupEditProfile.renderLoading(true)
   api.updateUserData(data)
     .then(res => {
       userInfo.setUserInfo(res)
@@ -53,7 +54,10 @@ function changeProfile(data) {
     .catch(error => {
       console.log('Ошибочка вышла')
     })
-    ;
+    .finally(() => {
+      popupEditProfile.renderLoading(false);
+    });
+  ;
 }
 
 //попап редактировать аватар
@@ -97,7 +101,7 @@ function createCard(data) {
               popupDelete.close()
             }).catch(error => console.log('Карточка не удалена'));
         }
-          
+
       },
       handleLikeClick: () => {
         if (card.checkLikeState()) {
@@ -142,6 +146,7 @@ popupAddImage.setEventListeners()
 
 //функция добавить картинку
 function addCard(data) {
+  popupAddImage.renderLoading(true);
   api.addNewCard(data)
     .then(res => {
       cardList.addItem(createCard(res))
@@ -149,6 +154,10 @@ function addCard(data) {
     .catch(error => {
       console.log('Карточка не добавлена')
     })
+    .finally(() => {
+      popupAddImage.renderLoading(false);
+    });
+  ;
 }
 
 // открытие попапа удалить карточку

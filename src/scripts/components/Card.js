@@ -6,7 +6,6 @@ export class Card {
         this._link = data.link;
         this._id = data._id;
         this._like = data.likes.length;
-        console.log(data.likes.length)
         this._owner = data.owner._id;
         this._userId = userId;
         this._handleCardClick = handleCardClick;
