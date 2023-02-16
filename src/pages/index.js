@@ -50,6 +50,7 @@ function changeProfile(data) {
   api.updateUserData(data)
     .then(res => {
       userInfo.setUserInfo(res)
+      popupEditProfile.close()
     })
     .catch(error => {
       console.log('Ошибочка вышла')
@@ -57,7 +58,6 @@ function changeProfile(data) {
     .finally(() => {
       popupEditProfile.renderLoading(false);
     });
-  ;
 }
 
 //попап редактировать аватар
@@ -69,14 +69,18 @@ popupEditAvatar.setEventListeners()
 
 //функция изменение аватара
 function changeAvatar(data) {
+  popupEditAvatar.renderLoading(true)
   api.updateAvatar(data)
     .then(res => {
-      document.querySelector(profileAvatar).style.backgroundImage = `url('${res.avatar}')`;
+      userInfo.setUserInfo(res);
+      popupEditAvatar.close()
     })
     .catch(error => {
       console.log('Аватар не удалось сменить(')
     })
-    ;
+    .finally(() => {
+      popupEditAvatar.renderLoading(false)
+    })
 }
 
 //Попап просмотреть картинку
@@ -106,14 +110,16 @@ function createCard(data) {
       handleLikeClick: () => {
         if (card.checkLikeState()) {
           api.doDislike(card._id)
-            .then(card.dislikeElement())
+            .then(res => {
+              card.dislikeElement();
+            })
             .catch(error => console.log('Лайк не удалился'))
         } else {
           api.doLike(card._id)
-            .then(card.likeElement())
-            .catch(error => {
-              console.log('Не лайкнулась')
+            .then(res => {
+              card.likeElement();
             })
+            .catch(error => console.log('Не лайкнулась'))
         }
 
       }
@@ -130,12 +136,6 @@ const cardList = new Section({
   }
 }, ".elements__container");
 
-
-api.getInitialCards()
-  .then(res => {
-    cardList.renderItems(res)
-  })
-
 // открытие попапа добавить карточку
 const popupAddImage = new PopupWithForm("#popup_add", addCard)
 document.querySelector(".profile__add-button").addEventListener("click", () => {
@@ -150,6 +150,7 @@ function addCard(data) {
   api.addNewCard(data)
     .then(res => {
       cardList.addItem(createCard(res))
+      popupAddImage.close()
     })
     .catch(error => {
       console.log('Карточка не добавлена')
@@ -157,7 +158,6 @@ function addCard(data) {
     .finally(() => {
       popupAddImage.renderLoading(false);
     });
-  ;
 }
 
 // открытие попапа удалить карточку

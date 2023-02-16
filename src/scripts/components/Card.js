@@ -45,14 +45,24 @@ export class Card {
         }
     }
 
+    _updateLike() {
+        const updateLikeCounter = document.createElement("span");
+        updateLikeCounter.classList.add("element__bottom-like-counter");
+        updateLikeCounter.textContent = this._like;
+        this._element.querySelector(".element__bottom-like-counter").replaceWith(updateLikeCounter);
+    }
+
     likeElement() {
         this._elementLikeBtn.classList.add("element__bottom-like_active");
-        this._likeCounter.textcontent = ++this._like
+        ++this._like;
+        this._updateLike();
+
     }
 
     dislikeElement() {
         this._elementLikeBtn.classList.remove("element__bottom-like_active");
-        this._likeCounter.textcontent = --this._like
+        --this._like;
+        this._updateLike();
     }
 
     checkLikeState() {
